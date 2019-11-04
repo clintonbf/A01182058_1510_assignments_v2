@@ -28,3 +28,19 @@ def determine_health_gain(current_health, max_health):
         return 1
     else:
         return 0
+
+
+def create_character():
+    """
+    Create a character for use in the sud
+
+    :postcondition: a character with limited DnD traits is created for use in the BCIT sud
+    :return: dictionary
+
+    >>>create_character()
+    {'Name': 'Anonymous', 'Dexterity': 0, 'Class': 'student', 'HP': {'Current': 10, 'Max': 10}}
+    """
+
+    character = {'Name': 'Anonymous', 'Dexterity': 0, 'Class': 'student', 'HP': {'Current': 10, 'Max': 10}}
+
+    return character

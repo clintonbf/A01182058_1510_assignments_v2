@@ -245,7 +245,7 @@ def calculate_hp(player_class):
         return roll_die(1, 8)
     elif player_class.lower() in ["sorcerer", "wizard"]:
         return roll_die(1, 6)
-    elif player_class.lower() == 'sud':
+    elif player_class.lower() in ["monster", "student"]:
         return roll_die(1, 6)
 
 
@@ -407,7 +407,6 @@ def does_p1_attack_first():
         return False
 
 
-# TODO: update unit tests
 def combat_round(player_1, player_2):
     """
     Execute a round of combat.

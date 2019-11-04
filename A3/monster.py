@@ -11,7 +11,7 @@ def generate_monster_name():
 
     possible_names = ('Chris', 'Sam', 'Neda', 'Takashi', 'Amir')
 
-    return possible_names[random.randint(0, len(possible_names))]
+    return random.choice(possible_names)
 
 
 def get_monster_attacks(name):
@@ -40,7 +40,7 @@ def get_monster_attacks(name):
     return attacks
 
 
-def generate_monster():
+def spawn_monster():
     """
     Create a monster in the dungeon.
 
@@ -49,5 +49,5 @@ def generate_monster():
     """
 
     monster = {'Name': generate_monster_name(), 'Attacks': get_monster_attacks(), 'HP': {'Current': 5, 'Max': 5},
-               'Dexterity': 0, 'Class': 'sud'}
+               'Dexterity': 0, 'Class': 'monster'}
 
