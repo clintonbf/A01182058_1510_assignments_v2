@@ -226,6 +226,7 @@ def select_class():
     return class_list[int(chosen_class)].lower()
 
 
+# TODO: do unit testing for SUD
 def calculate_hp(player_class):
     """
     Generate a player's starting HP
@@ -408,7 +409,6 @@ def does_p1_attack_first():
 
 
 # TODO: update unit tests
-# TODO:
 def combat_round(player_1, player_2):
     """
     Execute a round of combat.
@@ -418,7 +418,6 @@ def combat_round(player_1, player_2):
     :precondition: player_1 has structure {Name, Dexterity, Class, HP {Max, Current}, attacks[]}
     :precondition: player_2 has structure {Name, Dexterity, Class, HP {Max, Current}, attacks[]}
     :postcondition: players will fight a single combat round
-    :return: list
     """
     # by making a list I can code one set of fight instructions and then just flip the bits!
     player_list = [player_1, player_2]
@@ -432,9 +431,6 @@ def combat_round(player_1, player_2):
     else:
         px = 1
         py = 0
-
-    # This is the return structure
-    survival = [True, True]
 
     print(player_list[px]['Name'] + " attacks first!")
 
@@ -463,8 +459,6 @@ def combat_round(player_1, player_2):
             else:
                 px = 0
                 py = 1
-
-    return survival
 
 
 def wait_for_continue(bln):
