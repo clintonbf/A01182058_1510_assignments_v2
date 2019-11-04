@@ -9,5 +9,5 @@ class TestSpawn_monster(TestCase):
 
         m = spawn_monster()
 
-        for k in expected_m():
+        for k in expected_m:
             self.assertEqual(m[k], expected_m[k])
