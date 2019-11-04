@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch
 
-import dungeonsanddragons
+from A2 import dungeonsanddragons
 
 
 class TestCalculate_hp(TestCase):
@@ -33,3 +33,9 @@ class TestCalculate_hp(TestCase):
             test_hp = dungeonsanddragons.calculate_hp(t_class)
 
             self.assertEqual(test_hp, 3)
+
+    @patch('random.randint', return_value=3)
+    def test_calculate_hp_for_sud(self, mock_roll):
+        test_hp = dungeonsanddragons.calculate_hp('sud')
+
+        self.assertEqual(test_hp, 3)

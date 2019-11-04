@@ -226,7 +226,6 @@ def select_class():
     return class_list[int(chosen_class)].lower()
 
 
-# TODO: do unit testing for SUD
 def calculate_hp(player_class):
     """
     Generate a player's starting HP
@@ -450,7 +449,6 @@ def combat_round(player_1, player_2):
         # see if py lives
         if int(player_list[py]['HP']['Current']) <= 0:
             print(doom(player_list[py]['Name']))
-            survival[py] = False
             break
         else:  # flip the indices so the other player attacks
             if px == 0:

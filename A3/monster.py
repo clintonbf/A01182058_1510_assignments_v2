@@ -49,5 +49,5 @@ def generate_monster():
     """
 
     monster = {'Name': generate_monster_name(), 'Attacks': get_monster_attacks(), 'HP': {'Current': 5, 'Max': 5},
-               'Dexterity': 0, 'Class': }
+               'Dexterity': 0, 'Class': 'sud'}
 
