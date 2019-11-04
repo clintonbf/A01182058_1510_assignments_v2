@@ -1,10 +1,24 @@
-# import dungeonsanddragons
+from A2 import dungeonsanddragons
 
-# Defining two constants for the size of the game board, so we can elegantly change it
-import random
 
-MAX_X = 5
-MAX_Y = 5
+def get_max_x():
+    """
+    Provide constant value for x.
+
+    :postcondition: value for constant x is provided
+    :return: int
+    """
+    return 5
+
+
+def get_max_y():
+    """
+        Provide constant value for x.
+
+        :postcondition: value for constant x is provided
+        :return: int
+        """
+    return 5
 
 
 def create_dungeon():
@@ -17,8 +31,8 @@ def create_dungeon():
 
     game_board = []
 
-    for x in range(MAX_X):
-        game_row = [[x, y] for y in range(MAX_Y)]
+    for x in range(get_max_x()):
+        game_row = [[x, y] for y in range(get_max_y())]
         game_board.append(game_row)
 
     return game_board
@@ -67,11 +81,9 @@ def is_monster_encountered():
     :return: bool
     """
 
-    found = random.randint(1, 4)
-    # found = dungeonsanddragons.roll_die(1, 4)
+    found = dungeonsanddragons.roll_die(1, 4)
 
     if found == 1:
         return True
     else:
         return False
-

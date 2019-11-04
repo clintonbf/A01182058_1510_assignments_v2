@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch
 
-import sud
+from A3 import sud
 
 
 class TestIs_monster_encountered(TestCase):
@@ -12,5 +12,5 @@ class TestIs_monster_encountered(TestCase):
     @patch('random.randint', side_effect=[2, 3, 4])
     def test_is_monster_encountered_no(self, mock_roll):
 
-        for i in range(2, 5):
+        for i in range(3):
             self.assertFalse(sud.is_monster_encountered())
