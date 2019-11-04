@@ -48,5 +48,5 @@ def generate_monster():
     :return: dictionary
     """
 
-    monster = {'Name': generate_monster_name(), 'Attacks': get_monster_attacks()}
+    monster = {'Name': generate_monster_name(), 'Attacks': get_monster_attacks(), 'HP': {'Current': 5, 'Max': 5}}
 
