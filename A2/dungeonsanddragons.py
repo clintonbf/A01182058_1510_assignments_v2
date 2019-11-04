@@ -245,6 +245,8 @@ def calculate_hp(player_class):
         return roll_die(1, 8)
     elif player_class.lower() in ["sorcerer", "wizard"]:
         return roll_die(1, 6)
+    elif player_class.lower() == 'sud':
+        return roll_die(1, 6)
 
 
 def create_character(name_length):
@@ -405,6 +407,8 @@ def does_p1_attack_first():
         return False
 
 
+# TODO: update unit tests
+# TODO:
 def combat_round(player_1, player_2):
     """
     Execute a round of combat.
@@ -429,6 +433,7 @@ def combat_round(player_1, player_2):
         px = 1
         py = 0
 
+    # This is the return structure
     survival = [True, True]
 
     print(player_list[px]['Name'] + " attacks first!")
