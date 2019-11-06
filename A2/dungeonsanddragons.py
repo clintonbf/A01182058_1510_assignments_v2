@@ -386,7 +386,7 @@ def doom(name):
     return random.choice(doom_list)
 
 
-def does_p1_attack_first():
+def does_p1_attack_first() -> bool:
     """
     Determine is p1 has the initiative to attack.
 
@@ -420,6 +420,29 @@ def choose_attack(attacks):
     return random.choice(attacks)
 
 
+def swap_attacker_defender(player_roles: dict):
+    """
+    Swap who the attacker and defender are.
+
+    :param player_roles: dictionary
+    :precondition: roles has structure {'attacker': [1,0], 'defender': [1,0]}
+    :precondition: role values are mutually exclusive
+    :postcondition: values of roles['attacker'] and roles['defender'] are switched
+
+    >>> swap_attacker_defender({'attacker': 1, 'defender': 0})
+    {'attacker': 0, 'defender': 1}
+    >>> swap_attacker_defender({'attacker': 0, 'defender': 1})
+    {'attacker': 1, 'defender': 0}
+    """
+
+    if player_roles['attacker'] == 1:
+        player_roles['attacker'] = 0
+        player_roles['defender'] = 1
+    elif player_roles['attacker'] == 0:
+        player_roles['attacker'] = 1
+        player_roles['defender'] = 0
+
+
 def combat_round(player_1, player_2):
     """
     Execute a round of combat.
@@ -432,43 +455,44 @@ def combat_round(player_1, player_2):
     """
     # by making a list I can code one set of fight instructions and then just flip the bits!
     player_list = [player_1, player_2]
-
-    p1_init = does_p1_attack_first()
+    roles = {'attacker': 0, 'defender': 1}
 
     # Set the indices for who attacks first. We'll swap these after (unless there's a killing blow)
-    if p1_init:
-        px = 0
-        py = 1
-    else:
-        px = 1
-        py = 0
+    # if does_p1_attack_first():
+    #     attacker = 0
+    #     defender = 1
+    # else:
+    #     attacker = 1
+    #     defender = 0
 
-    print(player_list[px]['Name'] + " attacks first!")
+    if not does_p1_attack_first():
+        swap_attacker_defender(roles)
 
     for i in range(0, 2):
-        print(player_list[px]['Name'], "attacks with", choose_attack(player_list[px]['Attacks']))
-        attack_success = attempt_attack(roll_die(1, 20), player_list[px]['Dexterity'])
+        print(player_list[attacker]['Name'], "attacks with", choose_attack(player_list[attacker]['Attacks']))
+        attack_success = attempt_attack(roll_die(1, 20), player_list[attacker]['Dexterity'])
 
         # calculate damage
-        dmg_done = calculate_dmg(attack_success, player_list[px]['Class'])
+        dmg_done = calculate_dmg(attack_success, player_list[attacker]['Class'])
 
         # output an exclamation
         print(zounds(dmg_done))
 
         # apply damage
-        player_list[py]['HP']['Current'] = player_list[py]['HP']['Current'] - dmg_done
+        player_list[defender]['HP']['Current'] = player_list[defender]['HP']['Current'] - dmg_done
 
-        # see if py lives
-        if int(player_list[py]['HP']['Current']) <= 0:
-            print(doom(player_list[py]['Name']))
+        # see if defender lives
+        if int(player_list[defender]['HP']['Current']) <= 0:
+            print(doom(player_list[defender]['Name']))
             break
         else:  # flip the indices so the other player attacks
-            if px == 0:
-                px = 1
-                py = 0
+
+            if attacker == 0:
+                attacker = 1
+                defender = 0
             else:
-                px = 0
-                py = 1
+                attacker = 0
+                defender = 1
 
 
 def wait_for_continue(bln):
