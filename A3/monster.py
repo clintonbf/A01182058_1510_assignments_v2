@@ -33,7 +33,7 @@ def get_monster_attacks(name):
         attacks.extend(['a miniquiz', 'a donut', 'a number system'])
     elif name == 'Neda':
         attacks.extend(['git', 'figma', 'bootstrap'])
-        attacks.remove('midterm')
+        attacks.remove('the midterm')
     elif name == 'Amir':
         attacks.extend(['a fake quiz', 'a zombie attack'])
 

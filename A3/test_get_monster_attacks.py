@@ -5,8 +5,8 @@ from A3.monster import get_monster_attacks
 
 class TestGet_monster_attacks(TestCase):
     def test_get_monster_attacks_chris(self):
-        expected_attacks = ['quiz', 'assignment', 'midterm', 'partner quiz', 'python', 'question when you were trying '
-                                                                                       'to hide']
+        expected_attacks = ['a quiz', 'an assignment', 'the midterm', 'a partner quiz', 'a python',
+                            'a question when you were trying to hide']
 
         attacks = get_monster_attacks('Chris')
 
@@ -14,7 +14,7 @@ class TestGet_monster_attacks(TestCase):
             self.assertIn(attack, expected_attacks)
 
     def test_get_monster_attacks_sam(self):
-        expected_attacks = ['quiz', 'assignment', 'midterm', 'comma splice']
+        expected_attacks = ['a quiz', 'an assignment', 'the midterm', 'a comma splice']
 
         attacks = get_monster_attacks('Sam')
 
@@ -22,7 +22,7 @@ class TestGet_monster_attacks(TestCase):
             self.assertIn(attack, expected_attacks)
 
     def test_get_monster_attacks_neda(self):
-        expected_attacks = ['quiz', 'assignment', 'figma', 'git', 'bootstrap']
+        expected_attacks = ['a quiz', 'an assignment', 'figma', 'git', 'bootstrap']
 
         attacks = get_monster_attacks('Neda')
 
@@ -30,7 +30,7 @@ class TestGet_monster_attacks(TestCase):
             self.assertIn(attack, expected_attacks)
 
     def test_get_monster_attacks_takashi(self):
-        expected_attacks = ['quiz', 'assignment', 'midterm', 'miniquiz', 'donut', 'number system']
+        expected_attacks = ['a quiz', 'an assignment', 'the midterm', 'a miniquiz', 'a donut', 'a number system']
 
         attacks = get_monster_attacks('Takashi')
 
@@ -38,7 +38,7 @@ class TestGet_monster_attacks(TestCase):
             self.assertIn(attack, expected_attacks)
 
     def test_get_monster_attacks_amir(self):
-        expected_attacks = ['quiz', 'assignment', 'midterm', 'zombie attack']
+        expected_attacks = ['a quiz', 'an assignment', 'the midterm', 'a zombie attack', 'a fake quiz']
 
         attacks = get_monster_attacks('Amir')
 

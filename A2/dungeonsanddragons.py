@@ -457,42 +457,28 @@ def combat_round(player_1, player_2):
     player_list = [player_1, player_2]
     roles = {'attacker': 0, 'defender': 1}
 
-    # Set the indices for who attacks first. We'll swap these after (unless there's a killing blow)
-    # if does_p1_attack_first():
-    #     attacker = 0
-    #     defender = 1
-    # else:
-    #     attacker = 1
-    #     defender = 0
-
     if not does_p1_attack_first():
         swap_attacker_defender(roles)
 
     for i in range(0, 2):
-        print(player_list[attacker]['Name'], "attacks with", choose_attack(player_list[attacker]['Attacks']))
-        attack_success = attempt_attack(roll_die(1, 20), player_list[attacker]['Dexterity'])
+        print(player_list[roles['attacker']]['Name'], "attacks with", choose_attack(player_list[roles['attacker']]['Attacks']))
+        attack_success = attempt_attack(roll_die(1, 20), player_list[roles['attacker']]['Dexterity'])
 
         # calculate damage
-        dmg_done = calculate_dmg(attack_success, player_list[attacker]['Class'])
+        dmg_done = calculate_dmg(attack_success, player_list[roles['attacker']]['Class'])
 
         # output an exclamation
         print(zounds(dmg_done))
 
         # apply damage
-        player_list[defender]['HP']['Current'] = player_list[defender]['HP']['Current'] - dmg_done
+        player_list[roles['defender']]['HP']['Current'] = player_list[roles['defender']]['HP']['Current'] - dmg_done
 
         # see if defender lives
-        if int(player_list[defender]['HP']['Current']) <= 0:
-            print(doom(player_list[defender]['Name']))
+        if int(player_list[roles['defender']]['HP']['Current']) <= 0:
+            print(doom(player_list[roles['defender']]['Name']))
             break
         else:  # flip the indices so the other player attacks
-
-            if attacker == 0:
-                attacker = 1
-                defender = 0
-            else:
-                attacker = 0
-                defender = 1
+            swap_attacker_defender(roles)
 
 
 def wait_for_continue(bln):
