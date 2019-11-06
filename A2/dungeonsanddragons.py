@@ -407,6 +407,7 @@ def does_p1_attack_first():
         return False
 
 
+# TODO: add in code to include what the monster attacked with
 def combat_round(player_1, player_2):
     """
     Execute a round of combat.

@@ -27,6 +27,9 @@ def create_dungeon():
 
     :postcondition: a single-level dungeon (MAX_X x MAX_Y) is created
     :return: list
+
+    >>>create_dungeon()
+    [[0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4], [0, 1, 2, 3, 4]]
     """
 
     game_board = []
@@ -61,16 +64,51 @@ def execute_movement(location, direction):
     new_x = location[0]
     new_y = location[1]
 
-    if direction == 1 and location[1] < MAX_Y:  # ie. north
+    if direction == 1 and location[1] < get_max_y():  # ie. north
         new_y += 1
     elif direction == 2 and location[1] > 0:  # ie. south
         new_y -= 1
-    elif direction == 3 and location[0] < MAX_X:  # ie. east
+    elif direction == 3 and location[0] < get_max_x():  # ie. east
         new_x += 1
     elif direction == 4 and location[0] > 0:  # ie. west
         new_x -= 1
 
     return [new_x, new_y]
+
+
+def get_movement() -> str:
+    """
+    Get movement direction from user.
+
+    :postcondition: movement direction obtained
+    :return: string
+    """
+
+    return input("Which direction do you want to go (n, s, e, w)?")
+
+
+def validate_move(direction: str) -> bool:
+    """
+    Validate users movement choice.
+
+    :param direction: string
+    :precondition: direction in [n, s, w, e]
+    :return: bool
+
+    >>>validate_move('n')
+    True
+    >>>validate_move('1')
+    False
+    >>>validate_move('north')
+    False
+    >>>validate_move('g')
+    False
+    """
+
+    if direction.lower() in ['n', 's', 'e', 'w']:
+        return True
+    else:
+        return False
 
 
 def is_monster_encountered():

@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-import sud
+from A3 import sud
 
 
 class TestExecute_movement(TestCase):
