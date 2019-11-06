@@ -407,6 +407,19 @@ def does_p1_attack_first():
         return False
 
 
+def choose_attack(attacks):
+    """
+    Choose the character's attack.
+
+    :param attacks: list
+    :precondition: list contains strings of attack types
+    :postcondition: a random attack from attacks is selected
+    :return: string
+    """
+
+    return random.choice(attacks)
+
+
 # TODO: add in code to include what the monster attacked with
 def combat_round(player_1, player_2):
     """
@@ -432,6 +445,7 @@ def combat_round(player_1, player_2):
         py = 0
 
     print(player_list[px]['Name'] + " attacks first!")
+    print(player_list[px]['Name]'], "attacks with a(n)", choose_attack(player_list[px]['Attacks']))
 
     for i in range(0, 2):
         print(player_list[px]['Name'] + " attacks!")

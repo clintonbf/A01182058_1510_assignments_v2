@@ -50,16 +50,3 @@ def spawn_monster():
 
     monster = {'Name': generate_monster_name(), 'Attacks': get_monster_attacks(), 'HP': {'Current': 5, 'Max': 5},
                'Dexterity': 0, 'Class': 'monster'}
-
-
-def choose_monster_attack(attacks):
-    """
-    Choose the monster's attack.
-
-    :param attacks: list
-    :precondition: list contains strings of attack types
-    :postcondition: a random attack from attacks is selected
-    :return: string
-    """
-
-    return random.choice(attacks)
