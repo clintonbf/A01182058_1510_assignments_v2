@@ -475,6 +475,7 @@ def combat_round(player_1, player_2):
 
         # see if defender lives
         if int(player_list[roles['defender']]['HP']['Current']) <= 0:
+            print(player_list[roles['attacker']]['Name'], "is victorious!")
             print(doom(player_list[roles['defender']]['Name']))
             break
         else:  # flip the indices so the other player attacks
