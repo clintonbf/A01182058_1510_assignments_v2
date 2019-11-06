@@ -23,7 +23,7 @@ def get_monster_attacks(name):
     :postcondition: regular attacks + monster-specific attacks are provided
     :return: list
     """
-    attacks = ['quiz', 'assignment', 'midterm']
+    attacks = ['a quiz', 'an assignment', 'the midterm']
 
     if name == 'Chris':
         attacks.extend(['a partner quiz', 'a python', 'a question when you were trying to hide'])
