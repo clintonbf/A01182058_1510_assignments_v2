@@ -449,8 +449,8 @@ def combat_round(player_1, player_2):
 
     :param player_1: dictionary
     :param player_2: dictionary
-    :precondition: player_1 has structure {Name, Dexterity, Class, HP {Max, Current}, attacks[]}
-    :precondition: player_2 has structure {Name, Dexterity, Class, HP {Max, Current}, attacks[]}
+    :precondition: player_1 has structure {Name, Dexterity, Class, HP {Max, Current}, Attacks[]}
+    :precondition: player_2 has structure {Name, Dexterity, Class, HP {Max, Current}, Attacks[]}
     :postcondition: players will fight a single combat round
     """
     # by making a list I can code one set of fight instructions and then just flip the bits!
