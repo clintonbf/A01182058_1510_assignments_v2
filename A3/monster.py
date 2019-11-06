@@ -49,7 +49,7 @@ def spawn_monster():
     """
 
     monster = {'Name': generate_monster_name(), 'HP': {'Current': 5, 'Max': 5},
-               'Dexterity': 0, 'Class': 'monster'}
+               'Dexterity': 10, 'Class': 'monster'}
 
     monster['Attacks'] = get_monster_attacks(monster['Name'])
 
