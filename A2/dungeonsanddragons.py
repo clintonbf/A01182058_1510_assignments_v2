@@ -420,7 +420,6 @@ def choose_attack(attacks):
     return random.choice(attacks)
 
 
-# TODO: add in code to include what the monster attacked with
 def combat_round(player_1, player_2):
     """
     Execute a round of combat.
@@ -445,10 +444,9 @@ def combat_round(player_1, player_2):
         py = 0
 
     print(player_list[px]['Name'] + " attacks first!")
-    print(player_list[px]['Name]'], "attacks with a(n)", choose_attack(player_list[px]['Attacks']))
 
     for i in range(0, 2):
-        print(player_list[px]['Name'] + " attacks!")
+        print(player_list[px]['Name'], "attacks with", choose_attack(player_list[px]['Attacks']))
         attack_success = attempt_attack(roll_die(1, 20), player_list[px]['Dexterity'])
 
         # calculate damage

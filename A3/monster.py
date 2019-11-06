@@ -26,16 +26,16 @@ def get_monster_attacks(name):
     attacks = ['quiz', 'assignment', 'midterm']
 
     if name == 'Chris':
-        attacks.extend(['partner quiz', 'python', 'question when you were trying to hide'])
+        attacks.extend(['a partner quiz', 'a python', 'a question when you were trying to hide'])
     elif name == 'Sam':
-        attacks.extend(['comma splice'])
+        attacks.extend(['a comma splice'])
     elif name == 'Takashi':
-        attacks.extend(['miniquiz', 'donut', 'number system'])
+        attacks.extend(['a miniquiz', 'a donut', 'a number system'])
     elif name == 'Neda':
         attacks.extend(['git', 'figma', 'bootstrap'])
         attacks.remove('midterm')
     elif name == 'Amir':
-        attacks.extend(['fake quiz', 'zombie attack'])
+        attacks.extend(['a fake quiz', 'a zombie attack'])
 
     return attacks
 
@@ -48,5 +48,9 @@ def spawn_monster():
     :return: dictionary
     """
 
-    monster = {'Name': generate_monster_name(), 'Attacks': get_monster_attacks(), 'HP': {'Current': 5, 'Max': 5},
+    monster = {'Name': generate_monster_name(), 'HP': {'Current': 5, 'Max': 5},
                'Dexterity': 0, 'Class': 'monster'}
+
+    monster['Attacks'] = get_monster_attacks(monster['Name'])
+
+    return monster

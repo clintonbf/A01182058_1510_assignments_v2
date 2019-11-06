@@ -1,4 +1,7 @@
 from A2 import dungeonsanddragons
+from A2.dungeonsanddragons import combat_round
+from A3.character import create_character
+from A3.monster import spawn_monster
 
 
 def get_max_x():
@@ -202,3 +205,15 @@ def is_monster_encountered():
         return True
     else:
         return False
+
+
+def main():
+    char = create_character()
+    monster = spawn_monster()
+
+    print(char['Name'], 'and', monster['Name'], "square off!")
+    combat_round(char, monster)
+
+
+if __name__ == '__main__':
+    main()
