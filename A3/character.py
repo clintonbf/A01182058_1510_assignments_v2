@@ -43,5 +43,5 @@ def create_character():
 
     character = {'Name': 'Anonymous', 'Dexterity': 0, 'Class': 'student', 'HP': {'Current': 10, 'Max': 10},
                  'Attacks': ['studiousness', 'hard work', 'collaboration', 'academic integrity']}
-    # Todo: add in unit testing for character's attacks
+
     return character
