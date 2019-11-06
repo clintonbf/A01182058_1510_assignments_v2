@@ -111,6 +111,53 @@ def validate_move(direction: str) -> bool:
         return False
 
 
+def did_user_hit_a_wall(direction: str, character: dict) -> bool:
+    """
+    Determine if user hit a wall when moving.
+
+    :param direction: string
+    :param character: dictionary
+    :precondition: direction is a single character in [n, s, w, e]
+    :precondition: character is a dictionary
+    :precondition: character contains key "x-coord"
+    :precondition: character contains key "y-coord"
+    :precondition: -1 > x-coord < 5
+    :precondition: -1 > y-coord < 5
+    :postcondition: determine whether valid movement direction ran into a wall
+    :return: bool
+
+    >>>did_user_hit_a_wall('n', {'x-coord': 0, 'y-coord': 3})
+    False
+    >>>did_user_hit_a_wall('n', {'x-coord': 0, 'y-coord': 0})
+    True
+    >>>did_user_hit_a_wall('e', {'x-coord': 4, 'y-coord': 3})
+    True
+    >>>did_user_hit_a_wall('e', {'x-coord': 0, 'y-coord': 3})
+    False
+    """
+
+    if direction == 'n':
+        if character['y-coord'] == 0:
+            return True
+        else:
+            return False
+    elif direction == 's':
+        if character['y-coord'] == 4:
+            return True
+        else:
+            return False
+    elif direction == 'e':
+        if character['x-coord'] == 4:
+            return True
+        else:
+            return False
+    elif direction == 'w':
+        if character['x-coord'] == 0:
+            return True
+        else:
+            return False
+
+
 def move_char(direction: str, character: dict):
     """
     Move the character to a new location.
