@@ -455,7 +455,7 @@ def combat_round(player_1, player_2):
     """
     # by making a list I can code one set of fight instructions and then just flip the bits!
     player_list = [player_1, player_2]
-    roles = {'attacker': 0, 'defender': 1}
+    roles = {'attacker': 0, 'defender': 1}  # Assume player 1 attacks first
 
     if not does_p1_attack_first():
         swap_attacker_defender(roles)
