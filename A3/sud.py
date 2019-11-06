@@ -111,6 +111,36 @@ def validate_move(direction: str) -> bool:
         return False
 
 
+def move_char(direction: str, character: dict):
+    """
+    Move the character to a new location.
+
+    :param character: dictionary
+    :param direction: string
+    :precondition: direction is a single character in [n, s, w, e]
+    :precondition: character is a dictionary
+    :precondition: character contains key "x-coord"
+    :precondition: character contains key "y-coord"
+    :precondition: -1 > x-coord < 5
+    :precondition: -1 > y-coord < 5
+    :postcondition: updates character's position
+
+    >>>move_char('s',  {'x-coord': 0, 'y-coord': 0})
+    {'x-coord':0, 'y-coord': 1}
+    >>>move_char('e', {'x-coord': 0, 'y-coord': 3})
+    {'x-coord':1, 'y-coord': 3}
+    """
+
+    if direction == 'n':
+        character['y-coord'] -= 1
+    elif direction == 's':
+        character['y-coord'] += 1
+    elif direction == 'e':
+        character['x-coord'] += 1
+    elif direction == 'w':
+        character['x-coord'] -= 1
+
+
 def is_monster_encountered():
     """
     Determine if a monster is encountered.
