@@ -87,7 +87,7 @@ def get_movement() -> str:
     return input("Which direction do you want to go (n, s, e, w)?")
 
 
-def validate_move(direction: str) -> bool:
+def validate_movement_choice(direction: str) -> bool:
     """
     Validate users movement choice.
 
@@ -95,13 +95,13 @@ def validate_move(direction: str) -> bool:
     :precondition: direction in [n, s, w, e]
     :return: bool
 
-    >>>validate_move('n')
+    >>>validate_movement_choice('n')
     True
-    >>>validate_move('1')
+    >>>validate_movement_choice('1')
     False
-    >>>validate_move('north')
+    >>>validate_movement_choice('north')
     False
-    >>>validate_move('g')
+    >>>validate_movement_choice('g')
     False
     """
 
