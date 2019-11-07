@@ -322,7 +322,7 @@ def play_game():
                     print("You've managed to escape with", player['HP']['Current'], " hp. Let's hope you don't run into"
                                                                                     " another instructor anytime soon.")
                 else:
-                    print("You have been unable to cope with the workload. Bye")
+                    print("You have been unable to cope with the workload. See you PTS.")
 
 
 def main():
