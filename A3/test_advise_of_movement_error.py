@@ -16,6 +16,6 @@ class TestAdvise_of_movement_error(TestCase):
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_advise_of_movement_error_hit_a_wall(self, mock_output):
         advise_of_movement_error(2)
-        expected_output = "You hit a wall; ouch. Try a different direction(n, s, w, e)\n"
+        expected_output = "You hit a wall; ouch. Try a different choice(n, s, w, e)\n"
 
         self.assertEqual(mock_output.getvalue(), expected_output)

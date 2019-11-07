@@ -58,7 +58,7 @@ def execute_movement(location, direction):
     :param direction: int
     :precondition: current_spot is a 2-element list
     :precondition: 0 >= elements in current_spot <= 4
-    :precondition: 1 >= direction <= 4
+    :precondition: 1 >= choice <= 4
     :postcondition: will generate co-ordinates for where the player moved to
     :return: 2-element list
 
@@ -87,34 +87,36 @@ def execute_movement(location, direction):
 
 def get_movement() -> str:
     """
-    Get movement direction from user.
+    Get movement choice from user.
 
-    :postcondition: movement direction obtained
+    :postcondition: movement choice obtained
     :return: string
     """
 
-    return input("Which direction do you want to go (n, s, e, w)? Type 'quit' to... quit")
+    return input("Which choice do you want to go (n, s, e, w)? Type 'quit' to... quit")
 
 
-def validate_movement_choice(direction: str) -> bool:
+def validate_choice(choice: str, valid_choices: tuple) -> bool:
     """
     Validate users movement choice.
 
-    :param direction: string
-    :precondition: direction in [n, s, w, e]
+    :param valid_choices: tuple
+    :param choice: string
+    :precondition: valid_choices are strings
+    :precondition: valid_choices contains the valid choices to check against
     :return: bool
 
-    >>>validate_movement_choice('n')
+    >>>validate_choice('n', ('n', 's', 'w', 'e'))
     True
-    >>>validate_movement_choice('1')
+    >>>validate_choice('1', ('n', 's', 'w', 'e'))
     False
-    >>>validate_movement_choice('north')
+    >>>validate_choice('north', ('n', 's', 'w', 'e'))
     False
-    >>>validate_movement_choice('g')
+    >>>validate_choice('g', ('n', 's', 'w', 'e'))
     False
     """
 
-    if direction.lower() in ['n', 's', 'e', 'w']:
+    if choice.lower() in valid_choices:
         return True
     else:
         return False
@@ -132,13 +134,13 @@ def advise_of_movement_error(error: int):
     >>>advise_of_movement_error(1)
     "Invalid movement option. Please enter again (n, s, w, e)"
     >>>advise_of_movement_error(2)
-    "You hit a wall; ouch. Try a different direction(n, s, w, e)"
+    "You hit a wall; ouch. Try a different choice(n, s, w, e)"
     """
 
     if error == 1:
         print("Invalid movement option. Please enter again (n, s, w, e)")
     elif error == 2:
-        print("You hit a wall; ouch. Try a different direction(n, s, w, e)")
+        print("You hit a wall; ouch. Try a different choice(n, s, w, e)")
 
 
 def did_user_hit_a_wall(direction: str, character: dict) -> bool:
@@ -147,13 +149,13 @@ def did_user_hit_a_wall(direction: str, character: dict) -> bool:
 
     :param direction: string
     :param character: dictionary
-    :precondition: direction is a single character in [n, s, w, e]
+    :precondition: choice is a single character in [n, s, w, e]
     :precondition: character is a dictionary
     :precondition: character contains key "x-coord"
     :precondition: character contains key "y-coord"
     :precondition: -1 > x-coord < 5
     :precondition: -1 > y-coord < 5
-    :postcondition: determine whether valid movement direction ran into a wall
+    :postcondition: determine whether valid movement choice ran into a wall
     :return: bool
 
     >>>did_user_hit_a_wall('n', {'x-coord': 0, 'y-coord': 3})
@@ -194,7 +196,7 @@ def move_char(direction: str, character: dict):
 
     :param character: dictionary
     :param direction: string
-    :precondition: direction is a single character in [n, s, w, e]
+    :precondition: choice is a single character in [n, s, w, e]
     :precondition: character is a dictionary
     :precondition: character contains key "x-coord"
     :precondition: character contains key "y-coord"
@@ -254,20 +256,29 @@ def play_game():
             print("k bye. But don't think this means you've escaped!")
             break
 
-        while not validate_movement_choice(movement):
+        # Ensure movement is valid
+        while not validate_choice(movement, ('n', 's', 'w', 'e')):
             advise_of_movement_error(1)
             movement = get_movement()
 
+        # Did you walk into a wall?
         if did_user_hit_a_wall(movement, player):
             advise_of_movement_error(2)
         else:
             move_char(movement, player)
+
+            # Heal (if possible) and output new health
             player['HP']['Current'] += determine_health_gain(player['HP']['Current'], player['HP']['Max'])
             print("Current HP:", player['HP']['Current'])
 
             if is_monster_encountered():
                 monster = spawn_monster()
-                print(monster['Name'], "appears, with a need to evaluate in their eyes! You have no time for this!")
+                print(monster['Name'], "appears, with a need to evaluate in their eyes! You have no time for this!"
+                                       "(Or do you?)")
+
+                input("So, what's the deal: fight (choose 1) or flight (choose 2)?")
+
+
 
                 while player['HP']['Current'] > 0 and monster['HP']['Current'] > 0:
                     combat_round(player, monster)
