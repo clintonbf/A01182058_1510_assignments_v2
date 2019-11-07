@@ -1,6 +1,6 @@
 from A2 import dungeonsanddragons
 from A2.dungeonsanddragons import combat_round
-from A3.character import create_character
+from A3.character import create_character, determine_health_gain
 from A3.monster import spawn_monster
 
 
@@ -87,7 +87,7 @@ def get_movement() -> str:
     :return: string
     """
 
-    return input("Which direction do you want to go (n, s, e, w)?")
+    return input("Which direction do you want to go (n, s, e, w)? Type 'quit' to... quit")
 
 
 def validate_movement_choice(direction: str) -> bool:
@@ -112,6 +112,27 @@ def validate_movement_choice(direction: str) -> bool:
         return True
     else:
         return False
+
+
+def advise_of_movement_error(error: int):
+    """
+    Notify user they made an invalid movement.
+
+    :param error: int
+    :precondition: error is 1 if invalid movement option was provided
+    :precondition: error is 2 if user hit a wall
+    :postcondition: a helpful message is produced
+
+    >>>advise_of_movement_error(1)
+    "Invalid movement option. Please enter again (n, s, w, e)"
+    >>>advise_of_movement_error(2)
+    "You hit a wall; ouch. Try a different direction(n, s, w, e)"
+    """
+
+    if error == 1:
+        print("Invalid movement option. Please enter again (n, s, w, e)")
+    elif error == 2:
+        print("You hit a wall; ouch. Try a different direction(n, s, w, e)")
 
 
 def did_user_hit_a_wall(direction: str, character: dict) -> bool:
@@ -207,12 +228,53 @@ def is_monster_encountered():
         return False
 
 
-def main():
-    char = create_character()
-    monster = spawn_monster()
+def play_game():
+    """
+    Play 'Trapped at BCIT'.
 
-    print(char['Name'], 'and', monster['Name'], "square off!")
-    combat_round(char, monster)
+    :postcondition: you are filled with joy and delight
+    :postcondition: hours have passed
+    """
+
+    dungeon = create_dungeon()
+    player = create_character()
+
+    print("You find yourself at BCIT DTC on the 6th floor! Try to escape.")
+
+    while player['HP']['Current'] > 0:
+        movement = get_movement()
+
+        if movement.lower() == 'quit':
+            print("k bye. But don't think this means you've escaped!")
+            break
+
+        while not validate_movement_choice(movement):
+            advise_of_movement_error(1)
+            movement = get_movement()
+
+        if did_user_hit_a_wall(movement, player):
+            advise_of_movement_error(2)
+        else:
+            move_char(movement, player)
+            player['HP']['Current'] += determine_health_gain(player['HP']['Current'], player['HP']['Max'])
+            print("Current HP:", player['HP']['Current'])
+
+            if is_monster_encountered():
+                monster = spawn_monster()
+                print(monster['Name'], "appears, with a need to evaluate in their eyes! You have no time for this!")
+
+                while player['HP']['Current'] > 0 and monster['HP']['Current'] > 0:
+                    combat_round(player, monster)
+
+                if player['HP']['Current'] > 0:
+                    print("You've managed to escape with", player['HP']['Current'], " hp. Let's hope you don't run into"
+                                                                                    " another anytime soon.")
+                else:
+                    print("You have been unable to cope with the workload. Bye")
+
+
+def main():
+    play_game()
 
 
 if __name__ == '__main__':

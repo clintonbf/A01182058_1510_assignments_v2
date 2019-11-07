@@ -38,10 +38,13 @@ def create_character():
     :return: dictionary
 
     >>>create_character()
-    {'Name': 'Anonymous', 'Dexterity': 0, 'Class': 'student', 'HP': {'Current': 10, 'Max': 10}}
+    {'Name': 'Anonymous', 'Dexterity': 0, 'Class': 'student', 'HP': {'Current': 10, 'Max': 10}},
+    'Attacks': ['studiousness', 'hard work', 'collaboration', 'academic integrity'], 'x-coord': 0, 'y-coord': 0}
     """
 
+    # Todo: unit test player position
     character = {'Name': 'Anonymous', 'Dexterity': 10, 'Class': 'student', 'HP': {'Current': 10, 'Max': 10},
-                 'Attacks': ['studiousness', 'hard work', 'collaboration', 'academic integrity']}
+                 'Attacks': ['studiousness', 'hard work', 'collaboration', 'academic integrity'],
+                 'x-coord': 0, 'y-coord': 0}
 
     return character
