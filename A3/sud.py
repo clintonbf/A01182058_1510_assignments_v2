@@ -24,32 +24,6 @@ def get_max_y() -> int:
     return 5
 
 
-def create_dungeon() -> list:
-    """
-    Create a X x Y dungeon.
-
-    :postcondition: a single-level dungeon (MAX_X x MAX_Y) is created
-    :return: list
-
-    >>>create_dungeon()
-    [[[0, 0], [1, 0], [2, 0], [3, 0], [4, 0]], [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]], [[0, 2], [1, 2], [2, 2], [3, 2]
-    ,[4, 2]], [[0, 3], [1, 3], [2, 3], [3, 3], [4, 3]], [[0, 4], [1, 4], [2, 4], [3, 4], [4, 4]]]
-    """
-
-    game_board = []
-
-    # This works just fine, but it's not as sweet
-    for x in range(get_max_x()):
-        game_row = [[y, x] for y in range(get_max_y())]
-
-        game_board.append(game_row)
-
-    # The list comprehension works but makes a single list instead of a nested one
-    # game_board = [[y, x] for x in range(get_max_x()) for y in range(get_max_y())]
-
-    return game_board
-
-
 def execute_movement(location, direction):
     """
     Move one space on the board
