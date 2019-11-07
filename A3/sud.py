@@ -1,6 +1,5 @@
 import random
 
-from A2.dungeonsanddragons import combat_round, roll_die
 from A3.character import create_character, determine_health_gain
 from A3.monster import spawn_monster
 
@@ -11,6 +10,9 @@ def get_max_x() -> int:
 
     :postcondition: value for constant x is provided
     :return: int
+
+    >>>get_max_x()
+    5
     """
     return 5
 
@@ -21,7 +23,10 @@ def get_max_y() -> int:
 
         :postcondition: value for constant x is provided
         :return: int
-        """
+
+    >>> get_max_y()
+    5
+    """
     return 5
 
 
@@ -48,7 +53,7 @@ def combat_round(player_1: dict, player_2: dict):
         attack_success = attempt_attack(roll_die(1, 20), player_list[roles['attacker']]['Dexterity'])
 
         # calculate damage
-        dmg_done = calculate_dmg(attack_success, player_list[roles['attacker']]['Class'])
+        dmg_done = calculate_dmg(attack_success)
 
         # output an exclamation
         print(zounds(dmg_done))
@@ -63,29 +68,6 @@ def combat_round(player_1: dict, player_2: dict):
             break
         else:  # flip the indices so the other player attacks
             swap_attacker_defender(roles)
-
-
-def calculate_hp(player_class):
-    """
-    Generate a player's starting HP
-
-    :precondition: player_class is a string
-    :precondition: player_class is a legal DnD character class
-    :postcondition: player_class' starting hit points
-    :param player_class: string
-    :return: int
-    """
-
-    if player_class.lower() in ["barbarian"]:
-        return roll_die(1, 12)
-    elif player_class.lower() in ["fighter", "paladin", "ranger"]:
-        return roll_die(1, 10)
-    elif player_class.lower() in ["bard", "cleric", "druid", "monk", "rogue", "warlock"]:
-        return roll_die(1, 8)
-    elif player_class.lower() in ["sorcerer", "wizard"]:
-        return roll_die(1, 6)
-    elif player_class.lower() in ["monster", "student"]:
-        return roll_die(1, 6)
 
 
 def single_roll(number_of_sides: int) -> int:
@@ -163,19 +145,17 @@ def attempt_attack(attack_roll: int, dexterity: int) -> bool:
         return False
 
 
-def calculate_dmg(a_hit, char_class):
+def calculate_dmg(a_hit):
     """
     Calculates damage done in an attack.
 
     :param a_hit: boolean
-    :param char_class: string
     :precondition: success is true or false
-    :precondition: attacker's class is as defined in select_class()
-    :postcondition: the amount of damage applied, based on success
+    :postcondition: the amount of damage applied is calculated
     :return: int
     """
     if a_hit:
-        return calculate_hp(char_class)
+        return roll_die(1, 6)
     else:
         return 0
 
