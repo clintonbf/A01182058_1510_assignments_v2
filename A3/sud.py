@@ -1,5 +1,5 @@
 from A2 import dungeonsanddragons
-from A2.dungeonsanddragons import combat_round
+from A2.dungeonsanddragons import combat_round, roll_die
 from A3.character import create_character, determine_health_gain
 from A3.monster import spawn_monster
 
@@ -236,6 +236,34 @@ def is_monster_encountered():
         return False
 
 
+def stab_in_the_back() -> bool:
+    """
+    Attempt a stab in the back.
+
+    :postcondition: determine whether or not a successful stab in the back occurred
+    :return: bool
+    """
+
+    if roll_die(1, 10) == 1:
+        return True
+    else:
+        return False
+
+
+def process_cheap_shot() -> int:
+    """
+    Calculate damage from cheap shot.
+
+    :postcondition: calculate how much damage is executed from a stab in the back
+    :return: int
+    """
+
+    if stab_in_the_back():
+        return roll_die(1, 4)
+    else:
+        return 0
+
+
 def play_game():
     """
     Play 'Trapped at BCIT'.
@@ -276,12 +304,20 @@ def play_game():
                 print(monster['Name'], "appears, with a need to evaluate in their eyes! You have no time for this!"
                                        "(Or do you?)")
 
-                input("So, what's the deal: fight (choose 1) or flight (choose 2)?")
+                fight_or_flight = input("So, what's the deal: fight (choose 'y') or flight (choose 'n')?")
+                while not validate_choice(fight_or_flight, ('y', 'n')):
+                    print("Sorry, you gotta choose to fight or flee")
+
+                if fight_or_flight == 'y':
+                    while player['HP']['Current'] > 0 and monster['HP']['Current'] > 0:
+                        combat_round(player, monster)
+                else:
+                    # 10% change you're stabbed, damage 1d6
+                    player['HP']['Current'] -= process_cheap_shot()
 
 
 
-                while player['HP']['Current'] > 0 and monster['HP']['Current'] > 0:
-                    combat_round(player, monster)
+
 
                 if player['HP']['Current'] > 0:
                     print("You've managed to escape with", player['HP']['Current'], " hp. Let's hope you don't run into"
