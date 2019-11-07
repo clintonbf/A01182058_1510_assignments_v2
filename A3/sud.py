@@ -4,7 +4,7 @@ from A3.character import create_character, determine_health_gain
 from A3.monster import spawn_monster
 
 
-def get_max_x():
+def get_max_x() -> int:
     """
     Provide constant value for x.
 
@@ -14,7 +14,7 @@ def get_max_x():
     return 5
 
 
-def get_max_y():
+def get_max_y() -> int:
     """
         Provide constant value for x.
 
@@ -24,7 +24,7 @@ def get_max_y():
     return 5
 
 
-def create_dungeon():
+def create_dungeon() -> list:
     """
     Create a X x Y dungeon.
 
@@ -220,7 +220,7 @@ def move_char(direction: str, character: dict):
         character['x-coord'] -= 1
 
 
-def is_monster_encountered():
+def is_monster_encountered() -> bool:
     """
     Determine if a monster is encountered.
 
@@ -306,22 +306,21 @@ def play_game():
 
                 fight_or_flight = input("So, what's the deal: fight (choose 'y') or flight (choose 'n')?")
                 while not validate_choice(fight_or_flight, ('y', 'n')):
-                    print("Sorry, you gotta choose to fight or flee")
+                    fight_or_flight = input("Sorry, you gotta choose to fight ('y') or flee ('n')")
 
                 if fight_or_flight == 'y':
                     while player['HP']['Current'] > 0 and monster['HP']['Current'] > 0:
                         combat_round(player, monster)
                 else:
-                    # 10% change you're stabbed, damage 1d6
-                    player['HP']['Current'] -= process_cheap_shot()
-
-
-
-
+                    # 10% change you're stabbed, damage 1d4
+                    damage_taken = process_cheap_shot()
+                    if damage_taken > 0:
+                        print(monster['Name'], "notices your absence! That cost you", damage_taken, "hp!")
+                        player['HP']['Current'] -= damage_taken
 
                 if player['HP']['Current'] > 0:
                     print("You've managed to escape with", player['HP']['Current'], " hp. Let's hope you don't run into"
-                                                                                    " another anytime soon.")
+                                                                                    " another instructor anytime soon.")
                 else:
                     print("You have been unable to cope with the workload. Bye")
 
