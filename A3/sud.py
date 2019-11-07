@@ -145,7 +145,7 @@ def attempt_attack(attack_roll: int, dexterity: int) -> bool:
         return False
 
 
-def calculate_dmg(a_hit):
+def calculate_dmg(a_hit: bool) -> int:
     """
     Calculates damage done in an attack.
 
@@ -160,7 +160,7 @@ def calculate_dmg(a_hit):
         return 0
 
 
-def zounds(dmg_done):
+def zounds(dmg_done: int) -> int:
     """
     Provide a rousing exclamation for a player's hit.
 
@@ -183,7 +183,7 @@ def zounds(dmg_done):
         return random.choice(miss_list)
 
 
-def doom(name):
+def doom(name: str) -> str:
     """
     Provide a rousing exclamation for a player's death.
 
@@ -256,7 +256,7 @@ def swap_attacker_defender(player_roles: dict):
         player_roles['defender'] = 0
 
 
-def execute_movement(location, direction):
+def execute_movement(location: list, direction: int) -> list:
     """
     Move one space on the board
 
@@ -266,7 +266,7 @@ def execute_movement(location, direction):
     :precondition: 0 >= elements in current_spot <= 4
     :precondition: 1 >= choice <= 4
     :postcondition: will generate co-ordinates for where the player moved to
-    :return: 2-element list
+    :return: list
 
     >>>execute_movement([1, 2], 1)
     [1, 3]
