@@ -14,4 +14,3 @@ class TestStab_in_the_back(TestCase):
 
         for i in range(2, 11):
             self.assertFalse(stab_in_the_back())
-
