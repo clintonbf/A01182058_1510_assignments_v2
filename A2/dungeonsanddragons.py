@@ -1,7 +1,7 @@
 import random
 
 
-def single_roll(number_of_sides):
+def single_roll(number_of_sides: int) -> int:
     """
     Execute a single die roll.
 
@@ -15,7 +15,7 @@ def single_roll(number_of_sides):
 
 
 # noinspection DuplicatedCode
-def roll_die(number_of_rolls, number_of_sides):
+def roll_die(number_of_rolls: int, number_of_sides: int) -> int:
     """
     Calculate sum of  die rolls.
 
@@ -306,7 +306,7 @@ def print_character(character):
     print_inventory(visual_gear_numbering, gear_list)
 
 
-def attempt_attack(attack_roll, dexterity):
+def attempt_attack(attack_roll: int, dexterity: int) -> bool:
     """
     Determine if an attack is successful
     :param attack_roll: int
@@ -407,7 +407,7 @@ def does_p1_attack_first() -> bool:
         return False
 
 
-def choose_attack(attacks):
+def choose_attack(attacks: list) -> str:
     """
     Choose the character's attack.
 
@@ -443,7 +443,7 @@ def swap_attacker_defender(player_roles: dict):
         player_roles['defender'] = 0
 
 
-def combat_round(player_1, player_2):
+def combat_round(player_1: dict, player_2: dict):
     """
     Execute a round of combat.
 
@@ -461,7 +461,7 @@ def combat_round(player_1, player_2):
         swap_attacker_defender(roles)
 
     for i in range(0, 2):
-        print(player_list[roles['attacker']]['Name'], "attacks with", choose_attack(player_list[roles['attacker']]['Attacks']))
+        print(player_list[roles['attacker']]['Name'], "uses ", choose_attack(player_list[roles['attacker']]['Attacks']))
         attack_success = attempt_attack(roll_die(1, 20), player_list[roles['attacker']]['Dexterity'])
 
         # calculate damage
