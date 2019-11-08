@@ -21,7 +21,7 @@ def combat_round(player_1: dict, player_2: dict):
     for i in range(0, 2):
         print(player_list[roles['attacker']]['Name'], "attacks with",
               choose_attack(player_list[roles['attacker']]['Attacks']))
-        attack_success = attempt_attack(roll_die(1, 20), player_list[roles['attacker']]['Dexterity'])
+        attack_success = attempt_attack(roll_die(1, 20), player_list[roles['defender']]['Dexterity'])
 
         # calculate damage
         dmg_done = calculate_dmg(attack_success)

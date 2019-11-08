@@ -372,6 +372,7 @@ def play_game():
                 else:
                     # 10% change you're stabbed, damage 1d4
                     damage_taken = process_cheap_shot()
+
                     if damage_taken > 0:
                         print(monster['Name'], "notices your absence! That cost you", damage_taken, "hp!")
                         player['HP']['Current'] -= damage_taken
@@ -381,7 +382,7 @@ def play_game():
                                                                                     " another instructor anytime soon.")
                     weaken_special_item(player)
                 else:
-                    print("You have been unable to cope with the workload. See you PTS.")
+                    print("You have been unable to cope with the workload. See you in PTS.")
 
 
 def main():
