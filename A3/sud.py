@@ -6,6 +6,48 @@ from A3.combat import combat_round, roll_die
 from A3.monster import spawn_monster
 
 
+def get_monster_chance():
+    """
+    Set the chance of encountering a monster.
+
+    :postcondition: the number of sides of the rolled die is set.
+    :return: int
+
+    >>>get_monster_chance()
+    4
+    """
+
+    return 4
+
+
+def get_special_item_chance():
+    """
+    Get the chance of finding a special item.
+
+    :postcondition: the number of sides of the rolled die is set.
+    :return: int
+
+    >>> get_special_item_chance()
+    15
+    """
+
+    return 15
+
+
+def get_find_the_stairs_chance():
+    """
+    Get the chance of finding a special item.
+
+    :postcondition: the number of sides of the rolled die is set.
+    :return: int
+
+    >>> get_find_the_stairs_chance()
+    10
+    """
+
+    return 10
+
+
 def get_max_x() -> int:
     """
     Provide constant value for max x.
@@ -227,17 +269,17 @@ def move_char(direction: str, character: dict):
         character['x-coord'] -= 1
 
 
-def is_monster_encountered() -> bool:
+def is_monster_encountered(chance) -> bool:
     """
     Determine if a monster is encountered.
 
+    :param: chance: int
+    :precondition: chance is an integer
     :postcondition: whether or not a monster is encountered
     :return: bool
     """
 
-    found = roll_die(1, 4)
-
-    if found == 1:
+    if chance == 1:
         return True
     else:
         return False
@@ -331,7 +373,7 @@ def menacing_glare():
     """
 
     print(monster.generate_monster_name(),
-          "wanders by the the newly vacated exit, holding final exam; peering right at you...")
+          "wanders by the the newly vacated exit, holding a final exam; peering right at you...")
 
 
 def did_user_find_exit(floor: int, x_coord: int, y_coord: int, exit_coord: tuple) -> bool:
@@ -378,7 +420,7 @@ def play_game():
 
     print("You find yourself at BCIT DTC on the 6th floor! Try to escape.")
 
-    while player['HP']['Current'] > 0 or not escaped:
+    while player['HP']['Current'] > 0 and not escaped:
         movement = get_movement()
 
         if movement.lower() == 'quit':
@@ -396,7 +438,7 @@ def play_game():
         else:  # Player moves!
             move_char(movement, player)
 
-            if is_monster_encountered():
+            if is_monster_encountered(roll_die(1, get_monster_chance())):
                 opponent = spawn_monster()
 
                 add_formatting_line()
@@ -432,10 +474,10 @@ def play_game():
                 print("Current HP:", player['HP']['Current'])
 
                 # Was the special weapon found?
-                equip_special_item(roll_die(1, 15), player)
+                equip_special_item(roll_die(1, get_special_item_chance()), player)
 
                 # Was the stairs down found?
-                did_user_find_the_stairs(roll_die(1, 10), player)
+                did_user_find_the_stairs(roll_die(1, get_find_the_stairs_chance()), player)
 
                 # Did the user find the exit??
                 escaped = did_user_find_exit(player['Floor'], player['x-coord'], player['y-coord'], escape)
