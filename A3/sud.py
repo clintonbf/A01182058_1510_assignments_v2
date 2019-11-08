@@ -264,6 +264,26 @@ def weaken_special_item(the_player: dict):
             the_player['Dexterity'] = 10
 
 
+def did_user_find_the_stairs(chance: int, the_player: dict):
+    """
+    Determine if user stumbled upon the stairs.
+
+    :param chance: int
+    :param the_player: dictionary
+    :precondition: chance is int
+    :precondition: the_player has key = 'Floor'
+    :precondition: the_player['Floor'] stores an int
+
+    >>> did_user_find_the_stairs(1, the_player{'Floor': 3})
+    "Success! You made it to the stairs down!"
+    """
+
+    if the_player['Floor'] > 1:
+        if chance == 1:
+            print("Success! You made it to the stairs down!")
+            the_player['Floor'] -= 1
+
+
 def play_game():
     """
     Play 'Trapped at BCIT'.
@@ -291,7 +311,7 @@ def play_game():
         # Did you walk into a wall?
         if did_user_hit_a_wall(movement, player):
             advise_of_movement_error(2)
-        else:  # movement is valid
+        else:  # Player moves!
             move_char(movement, player)
 
             # Heal (if possible) and output new health
@@ -300,6 +320,9 @@ def play_game():
 
             # Was the special weapon found?
             equip_special_item(roll_die(1, 15), player)
+
+            # Was the stairs down found?
+            did_user_find_the_stairs()
 
             if is_monster_encountered():
                 monster = spawn_monster()
