@@ -116,7 +116,7 @@ def set_exit() -> tuple:
     if wall == 'x':
         exit_coordinate = (random.randint(get_min_x(), get_max_x()), random.choice((get_min_y(), get_max_y())))
     else:
-        exit_coordinate = (random.randint(get_min_y(), get_max_y()), random.choice((get_min_x(), get_max_x())))
+        exit_coordinate = (random.choice((get_min_x(), get_max_x())), random.randint(get_min_y(), get_max_y()), )
 
     return exit_coordinate
 
