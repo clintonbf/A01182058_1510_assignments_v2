@@ -11,9 +11,9 @@ def get_max_x() -> int:
     :return: int
 
     >>>get_max_x()
-    5
+    4
     """
-    return 5
+    return 4
 
 
 def get_max_y() -> int:
@@ -24,9 +24,9 @@ def get_max_y() -> int:
         :return: int
 
     >>> get_max_y()
-    5
+    4
     """
-    return 5
+    return 4
 
 
 def get_min_x() -> int:
@@ -139,7 +139,7 @@ def did_user_hit_a_wall(direction: str, character: dict) -> bool:
     """
 
     if direction == 'n':
-        if character['y-coord'] == 0:
+        if character['y-coord'] == get_min_y():
             return True
         else:
             return False
@@ -154,7 +154,7 @@ def did_user_hit_a_wall(direction: str, character: dict) -> bool:
         else:
             return False
     elif direction == 'w':
-        if character['x-coord'] == 0:
+        if character['x-coord'] == get_min_x():
             return True
         else:
             return False
