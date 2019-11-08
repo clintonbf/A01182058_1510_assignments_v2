@@ -1,3 +1,5 @@
+import random
+
 from A3 import monster
 from A3.character import create_character, determine_health_gain
 from A3.combat import combat_round, roll_die
@@ -54,6 +56,40 @@ def get_min_y() -> int:
     0
     """
     return 0
+
+
+def set_exit() -> tuple:
+    """
+    Set the exit coordinate.
+
+    :postcondition: a random exit coordinate is created
+    :postcondition: exit coordinate is against a wall
+    :postcondition: exit coordinate is within the boundaries set by get_min_x(), get_max_x(), get_min_y(), get_max_y()
+    :return: tuple
+    """
+
+    # get the edge axis at random
+    wall = random.choice(('x', 'y'))
+    # get edge coordinate
+    if wall == 'x':
+        exit_coordinate = (random.randint(get_min_x(), get_max_x()), random.choice((get_min_y(), get_max_y())))
+    else:
+        exit_coordinate = (random.randint(get_min_y(), get_max_y()), random.choice((get_min_x(), get_max_x())))
+
+    return exit_coordinate
+
+
+def add_formatting_line():
+    """
+    Add a formatting line.
+
+    :postcondition: readability is increased
+
+    >>> add_formatting_line()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    """
+
+    print("~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
 
 def get_movement() -> str:
@@ -283,6 +319,8 @@ def did_user_find_the_stairs(chance: int, the_player: dict):
         if chance == 1:
             print("Success! You made it to the stairs down!")
             the_player['Floor'] -= 1
+            add_formatting_line()
+            print("You're now on floor", the_player['Floor'])
 
 
 def menacing_glare():
@@ -335,6 +373,7 @@ def play_game():
     """
 
     player = create_character()
+    escape = set_exit()
     escaped = False
 
     print("You find yourself at BCIT DTC on the 6th floor! Try to escape.")
@@ -358,28 +397,32 @@ def play_game():
             move_char(movement, player)
 
             if is_monster_encountered():
-                monster = spawn_monster()
-                print(monster['Name'], "appears, with a need to evaluate in their eyes! You have no time for this!"
-                                       "(Or do you?)")
+                opponent = spawn_monster()
+
+                add_formatting_line()
+                print(opponent['Name'], "appears, with a need to evaluate in their eyes! You have no time for this!"
+                                        "(Or do you?)")
 
                 fight_or_flight = input("So, what's the deal: fight (choose 'y') or flight (choose 'n')?")
                 while not validate_choice(fight_or_flight, ('y', 'n')):
                     fight_or_flight = input("Sorry, you gotta choose to fight ('y') or flee ('n')")
 
                 if fight_or_flight == 'y':
-                    while player['HP']['Current'] > 0 and monster['HP']['Current'] > 0:
-                        combat_round(player, monster)
+                    while player['HP']['Current'] > 0 and opponent['HP']['Current'] > 0:
+                        add_formatting_line()
+                        combat_round(player, opponent)
                 else:
                     # 10% change you're stabbed, damage 1d4
                     damage_taken = stab_in_the_back(roll_die(1, 10))
 
                     if damage_taken > 0:
-                        print(monster['Name'], "notices your absence! That cost you", damage_taken, "hp!")
+                        print(opponent['Name'], "notices your absence! That cost you", damage_taken, "hp!")
                         player['HP']['Current'] -= damage_taken
 
                 if player['HP']['Current'] > 0:
                     print("You've managed to escape with", player['HP']['Current'], " hp. Let's hope you don't run into"
                                                                                     " another instructor anytime soon.")
+                    add_formatting_line()
                     weaken_special_item(player)
                 else:
                     print("You have been unable to cope with the workload. See you in PTS.")
@@ -395,7 +438,7 @@ def play_game():
                 did_user_find_the_stairs(roll_die(1, 10), player)
 
                 # Did the user find the exit??
-                escaped = did_user_find_exit(player['Floor'], player['x-coord'], player['y-coord'])
+                escaped = did_user_find_exit(player['Floor'], player['x-coord'], player['y-coord'], escape)
 
 
 def main():

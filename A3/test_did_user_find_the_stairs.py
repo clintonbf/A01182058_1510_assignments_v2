@@ -10,7 +10,7 @@ class TestDid_user_find_the_stairs(TestCase):
     def test_did_user_find_the_stairs_stairs_were_found_and_msg_printed(self, mock_output):
         did_user_find_the_stairs(1, {'Floor': 3})
 
-        self.assertEqual(mock_output.getvalue(), "Success! You made it to the stairs down!\n")
+        self.assertIn("Success! You made it to the stairs down!\n", mock_output.getvalue())
 
     def test_did_user_find_the_stairs_stairs_were_found_and_floor_decremented(self):
         p = {'Floor': 3}
