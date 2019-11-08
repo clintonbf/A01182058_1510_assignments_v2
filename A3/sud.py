@@ -215,33 +215,19 @@ def is_monster_encountered() -> bool:
         return False
 
 
-def stab_in_the_back() -> bool:
+def stab_in_the_back(chance: int) -> int:
     """
     Attempt a stab in the back.
 
-    :postcondition: determine whether or not a successful stab in the back occurred
-    :return: bool
-    """
-
-    if roll_die(1, 10) == 1:
-        return True
-    else:
-        return False
-
-
-def process_cheap_shot() -> int:
-    """
-    Calculate damage from cheap shot.
-
-    :postcondition: calculate how much damage is executed from a stab in the back
+    :param chance: int
+    :postcondition: determine how much damage a stab in the back caused
     :return: int
     """
 
-    if stab_in_the_back():
+    if chance == 1:
         return roll_die(1, 4)
     else:
         return 0
-
 
 # Todo May need to unit test this
 def did_you_find_the_special_weapon() -> bool:
@@ -355,7 +341,7 @@ def play_game():
 
             # Was the special weapon found?
             if did_you_find_the_special_weapon():
-                equip_special_item(player)  # Todo Dexterity effect doesn't seem to be working
+                equip_special_item(player)  # Todo Determine if dexterity is working now
 
             if is_monster_encountered():
                 monster = spawn_monster()
@@ -371,7 +357,7 @@ def play_game():
                         combat_round(player, monster)
                 else:
                     # 10% change you're stabbed, damage 1d4
-                    damage_taken = process_cheap_shot()
+                    damage_taken = stab_in_the_back(roll_die(1, 10))
 
                     if damage_taken > 0:
                         print(monster['Name'], "notices your absence! That cost you", damage_taken, "hp!")
