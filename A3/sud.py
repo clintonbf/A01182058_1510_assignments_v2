@@ -5,7 +5,7 @@ from A3.monster import spawn_monster
 
 def get_max_x() -> int:
     """
-    Provide constant value for x.
+    Provide constant value for max x.
 
     :postcondition: value for constant x is provided
     :return: int
@@ -18,15 +18,42 @@ def get_max_x() -> int:
 
 def get_max_y() -> int:
     """
-        Provide constant value for x.
+        Provide constant value for max y.
 
-        :postcondition: value for constant x is provided
+        :postcondition: value for constant max y is provided
         :return: int
 
     >>> get_max_y()
     5
     """
     return 5
+
+
+def get_min_x() -> int:
+    """
+    Provide constant value for min x.
+
+    :postcondition: value for constant max x is provided
+    :return: int
+
+    >>>get_min_x()
+    0
+    """
+    return 0
+
+
+def get_min_y() -> int:
+    """
+    Provide constant value for min y.
+
+    :postcondition: value for constant min y is provided
+    :return: int
+
+    >>>get_min_y()
+    0
+    """
+    return 0
+
 
 def get_movement() -> str:
     """
@@ -117,12 +144,12 @@ def did_user_hit_a_wall(direction: str, character: dict) -> bool:
         else:
             return False
     elif direction == 's':
-        if character['y-coord'] == 4:
+        if character['y-coord'] == get_max_y():
             return True
         else:
             return False
     elif direction == 'e':
-        if character['x-coord'] == 4:
+        if character['x-coord'] == get_max_x():
             return True
         else:
             return False
