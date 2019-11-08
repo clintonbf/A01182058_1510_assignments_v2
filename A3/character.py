@@ -1,5 +1,4 @@
-
-def determine_health_gain(current_health, max_health):
+def determine_health_gain(current_health: int, max_health: int) -> int:
     """
     Calculate health that character gains.
 
@@ -30,7 +29,7 @@ def determine_health_gain(current_health, max_health):
         return 0
 
 
-def create_character():
+def create_character() -> dict:
     """
     Create a character for use in the sud
 

@@ -1,7 +1,7 @@
 import random
 
 
-def generate_monster_name():
+def generate_monster_name() -> str:
     """
     Generate a monster name.
 
@@ -14,7 +14,7 @@ def generate_monster_name():
     return random.choice(possible_names)
 
 
-def get_monster_attacks(name):
+def get_monster_attacks(name: str) -> list:
     """
     Provide attacks for the monster, specific to the monster.
 
@@ -40,7 +40,7 @@ def get_monster_attacks(name):
     return attacks
 
 
-def spawn_monster():
+def spawn_monster() -> dict:
     """
     Create a monster in the dungeon.
 
