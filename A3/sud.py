@@ -341,7 +341,7 @@ def play_game():
 
             # Was the special weapon found?
             if did_you_find_the_special_weapon():
-                equip_special_item(player)  # Todo Determine if dexterity is working now
+                equip_special_item(player)
 
             if is_monster_encountered():
                 monster = spawn_monster()
