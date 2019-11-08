@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from A3.sud import swap_attacker_defender
+from A3.combat import swap_attacker_defender
 
 
 class TestSwap_attacker_defender(TestCase):

@@ -2,6 +2,7 @@ import io
 from unittest import TestCase
 from unittest.mock import patch
 
+import A3.combat
 from A3 import sud
 
 
@@ -16,7 +17,7 @@ class TestCombat_round(TestCase):
         test_p2 = {'Name': 'Superman', 'Class': 'warlock', 'Dexterity': 4, 'HP': {'Current': 5, 'Max': 5},
                    'Attacks': ['What does he really have besides his fists?']}
 
-        sud.combat_round(test_p1, test_p2)
+        A3.combat.combat_round(test_p1, test_p2)
 
         the_output = "The life is leaving Superman\n"
         self.assertIn(the_output, mock_output.getvalue())
@@ -31,7 +32,7 @@ class TestCombat_round(TestCase):
         test_p2 = {'Name': 'Superman', 'Class': 'warlock', 'Dexterity': 4, 'HP': {'Current': 5, 'Max': 5},
                    'Attacks': ['What does he really have besides his fists?']}
 
-        sud.combat_round(test_p1, test_p2)
+        A3.combat.combat_round(test_p1, test_p2)
 
         self.assertIn("A miss!\n", mock_output.getvalue())
 
@@ -44,7 +45,7 @@ class TestCombat_round(TestCase):
         test_p2 = {'Name': 'Superman', 'Class': 'warlock', 'Dexterity': 4, 'HP': {'Current': 5, 'Max': 5},
                    'Attacks': ['What does he really have besides his fists?']}
 
-        sud.combat_round(test_p1, test_p2)
+        A3.combat.combat_round(test_p1, test_p2)
 
         expected_output = ["Zounds! 2 damage done!\n", "Wow! 3 damage done!\n"]
         for output in expected_output:

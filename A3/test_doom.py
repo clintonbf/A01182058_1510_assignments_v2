@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch
 
-from A3.sud import doom
+from A3.combat import doom
 
 
 class TestDoom(TestCase):

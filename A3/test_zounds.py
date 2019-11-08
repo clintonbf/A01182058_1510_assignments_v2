@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch
 
-from A3.sud import zounds
+from A3.combat import zounds
 
 
 class TestZounds(TestCase):
