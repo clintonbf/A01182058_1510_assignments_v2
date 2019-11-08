@@ -229,50 +229,29 @@ def stab_in_the_back(chance: int) -> int:
     else:
         return 0
 
-# Todo May need to unit test this
-def did_you_find_the_special_weapon() -> bool:
-    """
-    Determine whether the special weapon was found.
 
-    :postcondition: determine whether or not you find the special weapon
-    :return: bool
-    """
-
-    return stab_in_the_back()
-
-
-# Todo doctest
-# todo unit test
-def equip_special_item(the_player: dict):
+def equip_special_item(chance: int, the_player: dict):
     """
     Equip the player character with the special item.
 
+    :param chance: int
     :param the_player: dictionary
-    :precondition: the_player has structure {'doctor-note': {'existence': False, 'durability': x}}
+    :precondition: chance is integer
+    :precondition: the_player has structure {'Dexterity': a, 'doctor-note': {'existence': False, 'durability': x}}
+    :postcondition: the_player receives a temporary boost to defence
+
+    >>>equip_special_item(1, the_player)
+    "You've found a doctor's note! This will certainly come in handy."
     """
 
-    print("You've found a doctor's note! This will certainly come in handy.")
-    the_player['doctor-note']['existence'] = True
-    the_player['doctor-note']['durability'] = 5
-    the_player['Dexterity'] = 99
+    if chance == 1:
+        print("You've found a doctor's note! This will certainly come in handy.")
+        the_player['doctor-note']['existence'] = True
+        the_player['doctor-note']['durability'] = 3
+        the_player['Dexterity'] = 99
 
 
-def destroy_special_item(the_player: dict):
-    """
-    Destroy the special item.
-
-    :param the_player: dictionary
-    :precondition: the_player has structure {'doctor-note': {'existence': True, 'durability': x}}
-    :precondition: the_player['doctor-note']['existence'] = True
-    :precondition: the_player['doctor-note']['durability'] > 0
-    :postcondition: player loses tne benefit of the special item
-    """
-    print("Your doctor's note has disintegrated! Ah well: back to good old hard work")
-    the_player['doctor-note']['existence'] = False
-    the_player['doctor-note']['durability'] = 0
-    the_player['Dexterity'] = 10
-
-
+# ToDo unit test
 def weaken_special_item(the_player: dict):
     """
     Lessen the efficacy of the special item.
@@ -289,7 +268,10 @@ def weaken_special_item(the_player: dict):
         the_player['doctor-note']['durability'] -= 1
 
         if the_player['doctor-note']['durability'] == 0:
-            destroy_special_item(the_player)
+            print("Your doctor's note has disintegrated! Ah well: back to good old hard work")
+            the_player['doctor-note']['existence'] = False
+            the_player['doctor-note']['durability'] = 0
+            the_player['Dexterity'] = 10
 
 
 def process_special_item(the_player: dict):
@@ -340,8 +322,7 @@ def play_game():
             print("Current HP:", player['HP']['Current'])
 
             # Was the special weapon found?
-            if did_you_find_the_special_weapon():
-                equip_special_item(player)
+            equip_special_item(roll_die(1, 15), player)
 
             if is_monster_encountered():
                 monster = spawn_monster()
