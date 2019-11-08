@@ -470,6 +470,77 @@ def process_cheap_shot() -> int:
         return 0
 
 
+# Todo May need to unit test this
+def did_you_find_the_special_weapon() -> bool:
+    """
+    Determine whether the special weapon was found.
+
+    :postcondition: determine whether or not you find the special weapon
+    :return: bool
+    """
+
+    return stab_in_the_back()
+
+
+# Todo doctest
+# todo unit test
+def equip_special_item(the_player: dict):
+    """
+    Equip the player character with the special item.
+
+    :param the_player: dictionary
+    :precondition: the_player has structure {'doctor-note': {'existence': False, 'durability': x}}
+    """
+
+    print("You've found a doctor's note! This will certainly come in handy.")
+    the_player['doctor-note']['existence'] = True
+    the_player['doctor-note']['durability'] = 5
+
+
+def destroy_special_item(the_player: dict):
+    """
+    Destroy the special item.
+
+    :param the_player: dictionary
+    :precondition: the_player has structure {'doctor-note': {'existence': True, 'durability': x}}
+    :precondition: the_player['doctor-note']['existence'] = True
+    :precondition: the_player['doctor-note']['durability'] > 0
+    :postcondition: player loses tne benefit of the special item
+    """
+    print("Your doctor's note has disintegrated! Ah well: back to good old hard work")
+    the_player['doctor-note']['existence'] = False
+    the_player['doctor-note']['durability'] = 0
+
+
+def weaken_special_weapon(the_player: dict):
+    """
+    Lessen the efficacy of the special item.
+
+    :param the_player:
+    :param the_player: dictionary
+    :precondition: the_player has structure {'doctor-note': {'existence': True, 'durability': 0}}
+    :precondition: the_player['doctor-note']['existence'] = True
+    :precondition: the_player['doctor-note']['durability'] > 0
+    :postcondition: durability of the special item is lessened
+    """
+
+    the_player['doctor-note']['durability'] -= 1
+
+    if the_player['doctor-note']['durability'] == 0:
+        destroy_special_item(the_player)
+
+
+def process_special_item(the_player: dict):
+    """
+    Process changes to the special item.
+
+    :param the_player:
+    :param the_player: dictionary
+    :precondition: the_player has structure {'doctor-note': {'existence': True, 'durability': 0}}
+    :postcondition: durability of the special item is lessened
+        """
+
+
 def play_game():
     """
     Play 'Trapped at BCIT'.
@@ -497,12 +568,16 @@ def play_game():
         # Did you walk into a wall?
         if did_user_hit_a_wall(movement, player):
             advise_of_movement_error(2)
-        else:
+        else:  # movement is valid
             move_char(movement, player)
 
             # Heal (if possible) and output new health
             player['HP']['Current'] += determine_health_gain(player['HP']['Current'], player['HP']['Max'])
             print("Current HP:", player['HP']['Current'])
+
+            # Was the special weapon found?
+            if did_you_find_the_special_weapon():
+                equip_special_item()
 
             if is_monster_encountered():
                 monster = spawn_monster()
