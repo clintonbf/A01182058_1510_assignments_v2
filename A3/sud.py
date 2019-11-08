@@ -1,3 +1,4 @@
+from A3 import monster
 from A3.character import create_character, determine_health_gain
 from A3.combat import combat_round, roll_die
 from A3.monster import spawn_monster
@@ -284,6 +285,47 @@ def did_user_find_the_stairs(chance: int, the_player: dict):
             the_player['Floor'] -= 1
 
 
+def menacing_glare():
+    """
+    Spawn a monster to glare menacingly.
+
+    :postcondition: a chilling glare of things to come is presented to the user
+    """
+
+    print(monster.generate_monster_name(),
+          "wanders by the the newly vacated exit, holding final exam; peering right at you...")
+
+
+def did_user_find_exit(floor: int, x_coord: int, y_coord: int, exit_coord: tuple) -> bool:
+    """
+    Determine if user found the exit.
+    
+    :param exit_coord: tuple
+    :param floor: int
+    :param x_coord: int
+    :param y_coord: int
+    :precondition: exit_coord is size 2
+    :precondition: exit_coord elements correspond to (x, y)
+    :precondition: exit_coord elements are ints
+    :precondition: get_min_x() < exit_coord(0) < get_max_x()
+    :precondition: get_min_y() < exit_coord(1) < get_max_y()
+    :precondition: floor = 1
+    :precondition: get_min_x() < x_coord < get_max_x()
+    :precondition: get_min_y() < y_coord < get_max_y()
+    :postcondition: determine if the user has magically found the exit
+    :return: bool
+    """
+
+    if floor == 1:
+        # Check to see if x and y match the secretly set-coordinates
+        if x_coord == exit_coord[0] and y_coord == exit_coord[1]:
+            print("You managed to find the exit! Enjoy your time off..... you'll be back")
+            menacing_glare()
+            return True
+    else:
+        return False
+
+
 def play_game():
     """
     Play 'Trapped at BCIT'.
@@ -293,10 +335,11 @@ def play_game():
     """
 
     player = create_character()
+    escaped = False
 
     print("You find yourself at BCIT DTC on the 6th floor! Try to escape.")
 
-    while player['HP']['Current'] > 0:
+    while player['HP']['Current'] > 0 or not escaped:
         movement = get_movement()
 
         if movement.lower() == 'quit':
@@ -313,16 +356,6 @@ def play_game():
             advise_of_movement_error(2)
         else:  # Player moves!
             move_char(movement, player)
-
-            # Heal (if possible) and output new health
-            player['HP']['Current'] += determine_health_gain(player['HP']['Current'], player['HP']['Max'])
-            print("Current HP:", player['HP']['Current'])
-
-            # Was the special weapon found?
-            equip_special_item(roll_die(1, 15), player)
-
-            # Was the stairs down found?
-            did_user_find_the_stairs()
 
             if is_monster_encountered():
                 monster = spawn_monster()
@@ -350,6 +383,19 @@ def play_game():
                     weaken_special_item(player)
                 else:
                     print("You have been unable to cope with the workload. See you in PTS.")
+            else:
+                # Heal (if possible) and output new health
+                player['HP']['Current'] += determine_health_gain(player['HP']['Current'], player['HP']['Max'])
+                print("Current HP:", player['HP']['Current'])
+
+                # Was the special weapon found?
+                equip_special_item(roll_die(1, 15), player)
+
+                # Was the stairs down found?
+                did_user_find_the_stairs(roll_die(1, 10), player)
+
+                # Did the user find the exit??
+                escaped = did_user_find_exit(player['Floor'], player['x-coord'], player['y-coord'])
 
 
 def main():
