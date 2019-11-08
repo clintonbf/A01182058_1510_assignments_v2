@@ -28,42 +28,6 @@ def get_max_y() -> int:
     """
     return 5
 
-
-def execute_movement(location: list, direction: int) -> list:
-    """
-    Move one space on the board
-
-    :param location: list
-    :param direction: int
-    :precondition: current_spot is a 2-element list
-    :precondition: 0 >= elements in current_spot <= 4
-    :precondition: 1 >= choice <= 4
-    :postcondition: will generate co-ordinates for where the player moved to
-    :return: list
-
-    >>>execute_movement([1, 2], 1)
-    [1, 3]
-    >>>execute_movement([1, 5], 1)
-    [1, 5]
-    >>>execute_movement([1, 2], 3)
-    [2, 2]
-    """
-
-    new_x = location[0]
-    new_y = location[1]
-
-    if direction == 1 and location[1] < get_max_y():  # ie. north
-        new_y += 1
-    elif direction == 2 and location[1] > 0:  # ie. south
-        new_y -= 1
-    elif direction == 3 and location[0] < get_max_x():  # ie. east
-        new_x += 1
-    elif direction == 4 and location[0] > 0:  # ie. west
-        new_x -= 1
-
-    return [new_x, new_y]
-
-
 def get_movement() -> str:
     """
     Get movement choice from user.
