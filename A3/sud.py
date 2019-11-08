@@ -273,19 +273,6 @@ def weaken_special_item(the_player: dict):
             the_player['Dexterity'] = 10
 
 
-def process_special_item(the_player: dict):
-    """
-    Process changes to the special item.
-
-    :param the_player:
-    :param the_player: dictionary
-    :precondition: the_player has structure {'doctor-note': {'existence': True, 'durability': 0}}
-    :postcondition: durability of the special item is affected
-    """
-
-    pass
-
-
 def play_game():
     """
     Play 'Trapped at BCIT'.
