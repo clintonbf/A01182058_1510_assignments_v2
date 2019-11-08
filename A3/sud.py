@@ -116,9 +116,22 @@ def set_exit() -> tuple:
     if wall == 'x':
         exit_coordinate = (random.randint(get_min_x(), get_max_x()), random.choice((get_min_y(), get_max_y())))
     else:
-        exit_coordinate = (random.choice((get_min_x(), get_max_x())), random.randint(get_min_y(), get_max_y()), )
+        exit_coordinate = (random.choice((get_min_x(), get_max_x())), random.randint(get_min_y(), get_max_y()),)
 
     return exit_coordinate
+
+
+def get_valid_movement_choices() -> tuple:
+    """
+    Get the valid choices in movement.
+
+    :postcondition: provide a tuple of the valid movement choices
+    :return: tuple
+    """
+
+    valid_choices = ('n', 's', 'w', 'e', 'god_battle', 'god_stairs', 'god_exit')
+
+    return valid_choices
 
 
 def add_formatting_line():
@@ -428,7 +441,7 @@ def play_game():
             break
 
         # Ensure movement is valid
-        while not validate_choice(movement, ('n', 's', 'w', 'e')):
+        while not validate_choice(movement, get_valid_movement_choices()):
             advise_of_movement_error(1)
             movement = get_movement()
 
