@@ -34,7 +34,7 @@ def get_special_item_chance():
     return 15
 
 
-def get_find_the_stairs_chance():
+def get_find_the_stairs_chance() -> int:
     """
     Get the chance of finding a special item.
 
@@ -419,22 +419,55 @@ def did_user_find_exit(floor: int, x_coord: int, y_coord: int, exit_coord: tuple
         return False
 
 
-def process_god_mode(movement: str, escape: tuple):
+def process_god_mode(movement: str, god_modifiers: dict):
     """
     Process god_mode cheats.
 
+    :param god_modifiers: dictionary
     :param movement: str
-    :param escape: tuple
+    :precondition: god_modifiers has {'items': x, 'stairs': y, escape(a, b)}
 
     :postcondition: god mode is activated on the chosen game aspect
     """
 
     if movement == 'god_exit':
-        print("The exit is at:", escape)
+        print("The exit is at:", god_modifiers['escape'])
     elif movement == 'god_battle':
-        pass
+        god_modifiers['item'] = apply_god_modification('item', True)
+        print("God mode activated: Chance of finding special item increased")
     elif movement == 'god_stairs':
-        pass
+        god_modifiers['stairs'] = apply_god_modification('stairs', True)
+        print("God mode activated: Chance of finding stairs increased")
+
+
+def apply_god_modification(mod_type: str, god: bool) -> int:
+    """
+    Add a modifier to the special item chance.
+
+    :param mod_type:
+    :param mod_type: str
+    :param god: int
+    :precondition: type in ['stairs', 'item']
+    :precondition: god is > 0
+    :precondition: god is integer
+    :postcondition: provides modifier to increase chance of finding type to 50%
+    :return: int
+
+    >>> apply_god_modification('item', True)
+    2
+    >>> apply_god_modification(False)
+    0
+    >>> apply_god_modification('stairs', True)
+    """
+
+    if god:
+        # return (get_special_item_chance() - 2) if mod_type == "item" else (get_find_the_stairs_chance() - 5)
+        if mod_type == 'item':
+            return get_special_item_chance() - 2
+        else:
+            return get_find_the_stairs_chance() - 5
+    else:
+        return 0
 
 
 def play_game():
@@ -446,9 +479,9 @@ def play_game():
     """
 
     player = create_character()
-    escape = set_exit()
     extra_commands = ('help', 'god_exit', 'god_battle', 'god_stairs')
     escaped = False
+    god_mode = {'stairs': 0, 'item': 0, 'escape': set_exit()}
 
     print("You find yourself at BCIT DTC on the 6th floor! Try to escape.")
 
@@ -462,7 +495,7 @@ def play_game():
         # Ensure movement is valid
         while not validate_choice(movement, get_valid_movement_choices()) or movement in extra_commands:
             if movement in extra_commands:
-                process_god_mode(movement, escape)
+                process_god_mode(movement, god_mode)  # apply changes if god mode was activated
             else:
                 advise_of_movement_error(1)
 
@@ -510,13 +543,13 @@ def play_game():
                 print("Current HP:", player['HP']['Current'])
 
                 # Was the special weapon found?
-                equip_special_item(roll_die(1, get_special_item_chance()), player)
+                equip_special_item(roll_die(1, (get_special_item_chance() - god_mode['item'])), player)
 
                 # Was the stairs down found?
-                did_user_find_the_stairs(roll_die(1, get_find_the_stairs_chance()), player)
+                did_user_find_the_stairs(roll_die(1, get_find_the_stairs_chance() - god_mode['stairs']), player)
 
                 # Did the user find the exit??
-                escaped = did_user_find_exit(player['Floor'], player['x-coord'], player['y-coord'], escape)
+                escaped = did_user_find_exit(player['Floor'], player['x-coord'], player['y-coord'], god_mode['escape'])
 
 
 def main():
