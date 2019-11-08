@@ -9,7 +9,7 @@ class TestCreate_character(TestCase):
 
         expected_attr = {'Name': 'Anonymous', 'Dexterity': 10, 'Class': 'student', 'HP': {'Current': 10, 'Max': 10},
                          'Attacks': ['studiousness', 'hard work', 'collaboration', 'academic integrity'],
-                         'x-coord': 0, 'y-coord': 0}
+                         'x-coord': 0, 'y-coord': 0, 'special-weapon': {'existence': False, 'durability': 0}}
 
         for k in c:
             self.assertEqual(c[k], expected_attr[k])
