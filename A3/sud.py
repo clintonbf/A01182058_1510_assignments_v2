@@ -251,7 +251,6 @@ def equip_special_item(chance: int, the_player: dict):
         the_player['Dexterity'] = 99
 
 
-# ToDo unit test
 def weaken_special_item(the_player: dict):
     """
     Lessen the efficacy of the special item.
