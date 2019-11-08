@@ -11,6 +11,6 @@ class TestMenacing_glare(TestCase):
     def test_menacing_glare_chris_wanders_by(self, mock_output, mock_choice):
         menacing_glare()
 
-        expected_output = "Chris wanders by the the newly vacated exit, holding final exam; peering right at you...\n"
+        expected_output = "Chris wanders by the the newly vacated exit, holding a final exam; peering right at you...\n"
 
         self.assertEqual(mock_output.getvalue(), expected_output)

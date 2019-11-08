@@ -129,7 +129,7 @@ def get_valid_movement_choices() -> tuple:
     :return: tuple
     """
 
-    valid_choices = ('n', 's', 'w', 'e', 'god_battle', 'god_stairs', 'god_exit', 'help')
+    valid_choices = ('n', 's', 'w', 'e', 'god_battle', 'god_stairs', 'god_exit', 'help', 'quit')
 
     return valid_choices
 
@@ -155,7 +155,7 @@ def get_movement() -> str:
     :return: string
     """
 
-    return input("Which choice do you want to go (n, s, e, w)? Type 'quit' to... quit")
+    return input("Which choice do you want to go (n, s, e, w)? Type 'help'... help. Type 'quit' to... quit")
 
 
 def validate_choice(choice: str, valid_choices: tuple) -> bool:
@@ -419,6 +419,24 @@ def did_user_find_exit(floor: int, x_coord: int, y_coord: int, exit_coord: tuple
         return False
 
 
+def process_god_mode(movement: str, escape: tuple):
+    """
+    Process god_mode cheats.
+
+    :param movement: str
+    :param escape: tuple
+
+    :postcondition: god mode is activated on the chosen game aspect
+    """
+
+    if movement == 'god_exit':
+        print("The exit is at:", escape)
+    elif movement == 'god_battle':
+        pass
+    elif movement == 'god_stairs':
+        pass
+
+
 def play_game():
     """
     Play 'Trapped at BCIT'.
@@ -429,6 +447,7 @@ def play_game():
 
     player = create_character()
     escape = set_exit()
+    extra_commands = ('help', 'god_exit', 'god_battle', 'god_stairs')
     escaped = False
 
     print("You find yourself at BCIT DTC on the 6th floor! Try to escape.")
@@ -441,8 +460,12 @@ def play_game():
             break
 
         # Ensure movement is valid
-        while not validate_choice(movement, get_valid_movement_choices()):
-            advise_of_movement_error(1)
+        while not validate_choice(movement, get_valid_movement_choices()) or movement in extra_commands:
+            if movement in extra_commands:
+                process_god_mode(movement, escape)
+            else:
+                advise_of_movement_error(1)
+
             movement = get_movement()
 
         # Did you walk into a wall?
