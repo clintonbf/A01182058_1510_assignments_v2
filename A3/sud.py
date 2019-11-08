@@ -129,7 +129,7 @@ def get_valid_movement_choices() -> tuple:
     :return: tuple
     """
 
-    valid_choices = ('n', 's', 'w', 'e', 'god_battle', 'god_stairs', 'god_exit')
+    valid_choices = ('n', 's', 'w', 'e', 'god_battle', 'god_stairs', 'god_exit', 'help')
 
     return valid_choices
 
