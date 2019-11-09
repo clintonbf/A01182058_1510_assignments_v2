@@ -294,8 +294,12 @@ def did_user_find_exit(floor: int, x_coord: int, y_coord: int, exit_coord: tuple
     if floor == 1:
         # Check to see if x and y match the secretly set-coordinates
         if x_coord == exit_coord[0] and y_coord == exit_coord[1]:
+            add_formatting_line()
+            add_formatting_line()
             print("You managed to find the exit! Enjoy your time off..... you'll be back")
             menacing_glare()
+            add_formatting_line()
+            add_formatting_line()
             return True
     else:
         return False
@@ -439,7 +443,7 @@ def play_game():
 
     print("You find yourself at BCIT DTC on the 6th floor! Try to escape.")
 
-    while player['HP']['Current'] > 0 and not player['Escape']:
+    while player['HP']['Current'] > 0 and not player['Escaped']:
         movement = get_movement()
 
         if movement.lower() == 'quit':
@@ -505,7 +509,7 @@ def play_game():
                 did_user_find_the_stairs(roll_die(1, get_find_the_stairs_chance() - god_mode['stairs']), player)
 
                 # Did the user find the exit??
-                player['Escape'] = did_user_find_exit(player['Floor'], player['x-coord'], player['y-coord'],
+                player['Escaped'] = did_user_find_exit(player['Floor'], player['x-coord'], player['y-coord'],
                                                       god_mode['escape'])
 
 
