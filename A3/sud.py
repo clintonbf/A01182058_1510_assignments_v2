@@ -455,17 +455,18 @@ def apply_god_modification(mod_type: str, god: bool) -> int:
 
     >>> apply_god_modification('item', True)
     2
-    >>> apply_god_modification(False)
+    >>> apply_god_modification('item', False)
     0
     >>> apply_god_modification('stairs', True)
+    2
     """
 
     if god:
         # return (get_special_item_chance() - 2) if mod_type == "item" else (get_find_the_stairs_chance() - 5)
         if mod_type == 'item':
-            return get_special_item_chance() - 2
+            return get_special_item_chance() - 13  # 15 - 13
         else:
-            return get_find_the_stairs_chance() - 5
+            return get_find_the_stairs_chance() - 8  # 10 - 8
     else:
         return 0
 

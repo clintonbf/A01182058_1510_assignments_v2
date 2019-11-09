@@ -2,13 +2,18 @@ import io
 from unittest import TestCase
 from unittest.mock import patch
 
+from A3.sud import apply_god_modification
+
 
 class TestApply_god_modification(TestCase):
-    @patch('sys.stdout', new_callable=io.StringIO)
-    def test_apply_god_modification(self, mock_output):
-        stats = {'items': False, 'stairs': False, 'escape': (1, 2)}
+    def test_apply_god_modification_no_god(self):
+        options = ['stairs', 'item']
 
-        expected_output = "The exit is at: (1, 2)\n"
-        apply_god_modification
+        for option in options:
+            self.assertEqual(apply_god_modification(option, False), 0)
 
-        self.assertEqual(expected_output.getvalue(), expected_output)
+    def test_apply_god_modification_god_and_item_or_stairs(self):
+        options = ['stairs', 'item']
+
+        for option in options:
+            self.assertEqual(apply_god_modification(option, True), 2)
