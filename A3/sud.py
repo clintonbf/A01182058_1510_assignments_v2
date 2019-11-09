@@ -554,12 +554,11 @@ def play_game():
 
     player = create_character()
     extra_commands = ('help', 'god_exit', 'god_battle', 'god_stairs', 'help')
-    escaped = False
     god_mode = {'stairs': 0, 'item': 0, 'escape': set_exit()}
 
     print("You find yourself at BCIT DTC on the 6th floor! Try to escape.")
 
-    while player['HP']['Current'] > 0 and not escaped:
+    while player['HP']['Current'] > 0 and not player['Escape']:
         movement = get_movement()
 
         if movement.lower() == 'quit':
@@ -625,7 +624,8 @@ def play_game():
                 did_user_find_the_stairs(roll_die(1, get_find_the_stairs_chance() - god_mode['stairs']), player)
 
                 # Did the user find the exit??
-                escaped = did_user_find_exit(player['Floor'], player['x-coord'], player['y-coord'], god_mode['escape'])
+                player['Escape'] = did_user_find_exit(player['Floor'], player['x-coord'], player['y-coord'],
+                                                      god_mode['escape'])
 
 
 def main():
