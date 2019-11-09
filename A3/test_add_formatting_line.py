@@ -2,7 +2,7 @@ import io
 from unittest import TestCase
 from unittest.mock import patch
 
-from A3.sud import add_formatting_line
+from A3.constants import add_formatting_line
 
 
 class TestAdd_formatting_line(TestCase):

@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from A3.sud import get_extra_commands
+from A3.constants import get_extra_commands
 
 
 class TestGet_extra_commands(TestCase):

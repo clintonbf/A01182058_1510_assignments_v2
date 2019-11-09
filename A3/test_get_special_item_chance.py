@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from A3.sud import get_special_item_chance
+from A3.constants import get_special_item_chance
 
 
 class TestGet_special_item_chance(TestCase):

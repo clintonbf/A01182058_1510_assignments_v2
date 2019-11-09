@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from A3.sud import get_monster_chance
+from A3.constants import get_monster_chance
 
 
 class TestGet_monster_chance(TestCase):

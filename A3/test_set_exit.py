@@ -1,7 +1,8 @@
 from unittest import TestCase
 from unittest.mock import patch
 
-from A3.sud import set_exit, get_min_x, get_max_x, get_min_y, get_max_y
+from A3.sud import set_exit
+from A3.constants import get_max_x, get_max_y, get_min_x, get_min_y
 
 
 class TestSet_exit(TestCase):

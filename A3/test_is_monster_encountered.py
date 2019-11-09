@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 from A3 import sud
 from A3.combat import roll_die
-from A3.sud import get_monster_chance
+from A3.constants import get_monster_chance
 
 
 class TestIs_monster_encountered(TestCase):
