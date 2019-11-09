@@ -1,4 +1,4 @@
-def get_monster_chance():
+def get_monster_chance() -> int:
     """
     Set the chance of encountering a monster.
 
@@ -12,7 +12,7 @@ def get_monster_chance():
     return 4
 
 
-def get_special_item_chance():
+def get_special_item_chance() -> int:
     """
     Get the chance of finding a special item.
 
