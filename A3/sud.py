@@ -464,9 +464,9 @@ def apply_god_modification(mod_type: str, god: bool) -> int:
     if god:
         # return (get_special_item_chance() - 2) if mod_type == "item" else (get_find_the_stairs_chance() - 5)
         if mod_type == 'item':
-            return 14
+            return 13
         elif mod_type == "stairs":
-            return 9
+            return 8
     else:
         return 0
 
@@ -572,7 +572,6 @@ def play_game():
         while not validate_choice(movement, get_valid_movement_choices()) or movement in extra_commands:
             if movement in extra_commands:
                 process_god_mode(movement, god_mode)  # apply changes if god mode was activated
-                print(god_mode)
             else:
                 advise_of_movement_error(1)
 
