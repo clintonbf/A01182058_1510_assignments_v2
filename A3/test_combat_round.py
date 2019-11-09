@@ -3,7 +3,6 @@ from unittest import TestCase
 from unittest.mock import patch
 
 import A3.combat
-from A3 import sud
 
 
 class TestCombat_round(TestCase):
@@ -37,7 +36,8 @@ class TestCombat_round(TestCase):
         self.assertIn("A miss!\n", mock_output.getvalue())
 
     @patch('random.randint', side_effect=[20, 1, 20, 2, 20, 3])  # (init, init, attack, damage, attack, damage)
-    @patch('random.choice', side_effect=['a batarang!', 'Zounds! ', 'What does he really have besides his fists?', 'Wow! '])
+    @patch('random.choice', side_effect=['a batarang!', 'Zounds! ', 'What does he really have besides his fists?',
+                                         'Wow! '])
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_combat_round_riposte(self, mock_output, mock_choice, mock_roll):
         test_p1 = {'Name': 'Batman', 'Class': 'fighter', 'Dexterity': 5, 'HP': {'Current': 10, 'Max': 10},

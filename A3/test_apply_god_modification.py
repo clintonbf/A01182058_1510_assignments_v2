@@ -1,6 +1,4 @@
-import io
 from unittest import TestCase
-from unittest.mock import patch
 
 from A3.sud import apply_god_modification
 

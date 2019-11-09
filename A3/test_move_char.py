@@ -27,4 +27,3 @@ class TestMove_char(TestCase):
         move_char('w', c)
 
         self.assertEqual(c['x-coord'], 2)
-

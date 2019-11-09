@@ -1,7 +1,6 @@
 from unittest import TestCase
 
 import A3.combat
-from A3 import sud
 
 
 class TestAttempt_attack(TestCase):
