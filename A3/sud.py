@@ -471,6 +471,79 @@ def apply_god_modification(mod_type: str, god: bool) -> int:
         return 0
 
 
+def output_help():
+    """
+    Output help instructions to user.
+
+    :postcondition: Game purpose and help options provided to user
+
+    >>>output_help()
+    ****************************************************************************************
+            Welcome to ~~Escape from BCIT~~
+            A game of daring-do, perilous movements, underwhelming battle and nonsense.
+
+            Your purpose is to find the exit on the 1st floor and escape.
+            But beware! Along the way you may encounter instructors whose only goal is to terrorize you
+            with learning evaluations!
+
+            Will you escape? Who knows!!!
+
+            Movement commands:
+            - n: go north
+            - s: go south
+            - e: go east
+            - w: go west (life is peaceful there.)
+            - quit: go back to real life
+            - help: print this message
+
+            Context commands:
+            These will be explained in their own context.
+
+            God mode:
+            - god_battle: increase likelihood of getting battle-determining tech
+            - god_stairs: increase likelihood of finding stairs
+            - god_exit: the location of the exit
+
+            Note that god-mode cannot be de-activated. I hope your tiny ego can cope.
+
+            Enjoy!
+            - Sid Viscous
+            ****************************************************************************************
+    """
+
+    print("""****************************************************************************************
+            Welcome to ~~Escape from BCIT~~
+            A game of daring-do, perilous movements, underwhelming battle and nonsense.
+            
+            Your purpose is to find the exit on the 1st floor and escape.
+            But beware! Along the way you may encounter instructors whose only goal is to terrorize you 
+            with learning evaluations!
+            
+            Will you escape? Who knows!!!
+            
+            Movement commands:
+            - n: go north
+            - s: go south
+            - e: go east
+            - w: go west (life is peaceful there.)
+            - quit: go back to real life
+            - help: print this message
+            
+            Context commands:
+            These will be explained in their own context.
+            
+            God mode:
+            - god_battle: increase likelihood of getting battle-determining tech
+            - god_stairs: increase likelihood of finding stairs
+            - god_exit: the location of the exit
+            
+            Note that god-mode cannot be de-activated. I hope your tiny ego can cope.
+            
+            Enjoy!
+            - Sid Viscous
+            ****************************************************************************************""")
+
+
 def play_game():
     """
     Play 'Trapped at BCIT'.
@@ -480,7 +553,7 @@ def play_game():
     """
 
     player = create_character()
-    extra_commands = ('help', 'god_exit', 'god_battle', 'god_stairs')
+    extra_commands = ('help', 'god_exit', 'god_battle', 'god_stairs', 'help')
     escaped = False
     god_mode = {'stairs': 0, 'item': 0, 'escape': set_exit()}
 
@@ -492,6 +565,8 @@ def play_game():
         if movement.lower() == 'quit':
             print("k bye. But don't think this means you've escaped!")
             break
+        elif movement.lower() == "help":
+            output_help()
 
         # Ensure movement is valid
         while not validate_choice(movement, get_valid_movement_choices()) or movement in extra_commands:
