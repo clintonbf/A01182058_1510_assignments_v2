@@ -100,6 +100,22 @@ def get_min_y() -> int:
     return 0
 
 
+def get_extra_commands() -> tuple:
+    """
+    Provide extra commands.
+
+    :postcondition: the additional valid commands are provided
+    :return: tuple
+
+    >>> get_extra_commands()
+    ('help', 'god_exit', 'god_battle', 'god_stairs')
+    """
+
+    return_tuple = ('help', 'god_exit', 'god_battle', 'god_stairs')
+
+    return return_tuple
+
+
 def set_exit() -> tuple:
     """
     Set the exit coordinate.
@@ -553,7 +569,6 @@ def play_game():
     """
 
     player = create_character()
-    extra_commands = ('help', 'god_exit', 'god_battle', 'god_stairs', 'help')
     god_mode = {'stairs': 0, 'item': 0, 'escape': set_exit()}
 
     print("You find yourself at BCIT DTC on the 6th floor! Try to escape.")
@@ -568,8 +583,8 @@ def play_game():
             output_help()
 
         # Ensure movement is valid
-        while not validate_choice(movement, get_valid_movement_choices()) or movement in extra_commands:
-            if movement in extra_commands:
+        while not validate_choice(movement, get_valid_movement_choices()) or movement in get_extra_commands():
+            if movement in get_extra_commands():
                 process_god_mode(movement, god_mode)  # apply changes if god mode was activated
             else:
                 advise_of_movement_error(1)
