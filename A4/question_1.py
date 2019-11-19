@@ -66,15 +66,12 @@ def eratosthenes(upperbound: int) -> list:
     elimination_list = [num for num in range(4, (upperbound + 1), 2)]
 
     # Range to examine is  [3, upperbound] because all even numbers > 2 are divisible by 2 and thus aren't prime
-    # for num in range(3, (upperbound + 1), 2):
     for num in range(3, (no_multiples_beyond + 1), 2):
         if num not in elimination_list:
             elimination_list.extend(generate_multiples(num, upperbound))
-            # elimination_list.extend(generate_multiples(num, no_multiples_beyond))
 
     # Build the final list, excluding any number in elimination_list
     prime_list = [num for num in range(2, (upperbound + 1)) if num not in elimination_list]
-    # prime_list.extend([num for num in range(2, (no_multiples_beyond + 1)) if num not in elimination_list])
 
     return prime_list
 
