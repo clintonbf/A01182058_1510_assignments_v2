@@ -49,32 +49,33 @@ def eratosthenes(upperbound: int) -> list:
     :postcondition: all prime numbers between 0 and upper-bound are determined
 
     :return: list
+
+    >>>eratosthenes(30)
+    [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+
+    >>>eratosthenes(0)
+    []
     """
     # ToDo: Raise an exception if upperbound < 0
-
-    # Take the square root of upper bound; check from 2 to that upperbound (0 & 1 are not prime)
     # Populate a list to eliminate from. I like this idea because I don't want to iterate through a list and eliminate
 
-    prime_list = [2]
-    upper_check_limit = int(math.sqrt(upperbound))
+    prime_list = []
+    no_multiples_beyond = int(math.sqrt(upperbound))
 
     # Populate it with all even numbers (other than 2)
-    elimination_list = [num for num in range(4, (upper_check_limit + 1), 2)]
+    elimination_list = [num for num in range(4, (upperbound + 1), 2)]
 
-    # Range to examine is  [3, upper_check_limit] because all even numbers > 2 are divisible by 2 and thus aren't prime
-    suspect_list = range(3, (upper_check_limit + 1), 2)
-
-    for num in suspect_list:
+    # Range to examine is  [3, upperbound] because all even numbers > 2 are divisible by 2 and thus aren't prime
+    # for num in range(3, (upperbound + 1), 2):
+    for num in range(3, (no_multiples_beyond + 1), 2):
         if num not in elimination_list:
-            elimination_list.extend(generate_multiples(num, upper_check_limit))
+            elimination_list.extend(generate_multiples(num, upperbound))
+            # elimination_list.extend(generate_multiples(num, no_multiples_beyond))
 
     # Build the final list, excluding any number in elimination_list
-    return [num for num in range(2, (upper_check_limit + 1)) if num not in elimination_list]
+    prime_list = [num for num in range(2, (upperbound + 1)) if num not in elimination_list]
+    # prime_list.extend([num for num in range(2, (no_multiples_beyond + 1)) if num not in elimination_list])
 
+    return prime_list
 
-    # for i in range(3, (upper_check_limit + 1), 2):  # Save this cleverness for later
-
-
-
-
-
+    # for i in range(3, (no_multiples_beyond + 1), 2):  # Save this cleverness for later
