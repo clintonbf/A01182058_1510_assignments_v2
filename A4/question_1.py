@@ -59,7 +59,6 @@ def eratosthenes(upperbound: int) -> list:
     # ToDo: Raise an exception if upperbound < 0
     # Populate a list to eliminate from. I like this idea because I don't want to iterate through a list and eliminate
 
-    prime_list = []
     no_multiples_beyond = int(math.sqrt(upperbound))
 
     # Populate it with all even numbers (other than 2)
