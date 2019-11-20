@@ -9,7 +9,7 @@ def dijkstra(lst: list):
 
     >>>dijkstra(['red', 'white', 'blue'])
     ['red', 'white', 'blue']
-    >>>dijkstra(['blue', 'red', 'white', 'blue']
+    >>>dijkstra(['blue', 'red', 'white', 'blue'])
     ['red', 'white', 'blue', 'blue]
     >>>dijkstra(['white', 'blue', 'blue', 'red', 'white', 'red', 'white'])
     ['red', 'red', 'white', 'white', 'white', 'blue', 'blue']
@@ -17,24 +17,5 @@ def dijkstra(lst: list):
 
     lst.sort()
 
-    # Find the last occurrence of 'blue'
-    last_blue = 0
-    for colour in lst:
-        if colour == 'red':
-            break
-        else:
-            last_blue += 1
-
-    guard = 0
-    while lst[guard] != 'red':
-        del (lst[guard])
-        lst.extend('blue')
-        guard += 1
-
-    # # Remove all instances of blue
-    # for i in range(0, last_blue):
-    #     del (lst[i])
-    #
-    # # Re-add all instances of blue
-    # for i in range(0, last_blue):
-    #     lst.extend('blue')
+    while lst[0] != 'red':
+        lst.append(lst.pop(0))
