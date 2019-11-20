@@ -24,3 +24,10 @@ class TestDijkstra(TestCase):
         dijkstra(lst)
 
         self.assertEqual(expected_end, lst)
+
+    def test_dijkstra_first_item_is_white(self):
+        lst = ['white', 'red', 'blue', 'red', 'white']
+        expected_end = ['red', 'red', 'white', 'white', 'blue']
+        dijkstra(lst)
+
+        self.assertEqual(expected_end, lst)

@@ -4,8 +4,8 @@ def dijkstra(lst: list):
 
     :param lst: list of strings ['red', 'white', 'blue'] in any order, repeated any amount of times
     :precondition: lst is non-empty
-    :precondition: lst can contain only ['red', 'white', 'blue']
-    :precondition: lst must contain at least one instance of each of ['red', 'white', 'blue']
+    :precondition: lst can contain only 'red', 'white', or 'blue'
+    :precondition: lst must contain at least one instance of each of 'red', 'white', and 'blue'
     :postcondition: lst is sorted such that every 'red' appears first, then every 'white', then every 'blue'
 
     >>>dijkstra(['red', 'white', 'blue'])
