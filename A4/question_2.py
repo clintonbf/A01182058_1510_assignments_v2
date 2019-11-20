@@ -11,6 +11,8 @@ def gcd(a: int, b: int) -> int:
 
     >>>gcd(270, 192)
     6
+    >>>gcd(270, 0)
+    0
     """
 
     # TODO: raise an exception if a or b is not a non-zero integer (or raise unless a & b are non-zero integers)
