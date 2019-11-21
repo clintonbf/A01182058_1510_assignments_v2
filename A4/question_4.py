@@ -1,41 +1,4 @@
-def find_smallest_number_element(lst: list, min_index: int) -> int:
-    """
-    Find the element of the smallest number in a list.
-
-    :param min_index: int, smallest index to start checking from
-    :param lst: list
-    :precondition: lst is non-empty
-    :precondition: lst values are all integers
-    :precondition: min_index < len(lst)
-    :postcondition: the element of the smallest number in the list is determined
-    :postcondition: where a value is repeated, the smaller of the two elements is the output
-    :return: int
-
-    >>> find_smallest_number_element([15, 23, -4, 1], 0)
-    2
-    >>> find_smallest_number_element([-18, 23, -4, 1], 0)
-    2
-    >>> find_smallest_number_element([0, 1, 2, 3], 0)
-    2
-    >>> find_smallest_number_element([49, 18, 9, 12, 32, 9, 121, 56], 0)
-    2
-    """
-
-    # TODO: add additional DJE's wrt to min_index
-    # TODO: using sorted to make this work is surely NOT valid
-    sorted_list = sorted(lst)
-
-    smallest_index = min_index
-    if sorted_list[min_index] == lst[min_index]:  # is the first element in the sorted list the first element in lst?
-        return min_index
-    else:
-        while lst[smallest_index] != sorted_list[0]:
-            smallest_index += 1
-
-    return smallest_index
-
-
-def is_this_number_smallest(num: int, lst: list) -> bool:
+def is_this_number_smallest(lst: list, num: int) -> bool:
     """
     Determine if a number is the smallest in a list.
 
@@ -61,7 +24,7 @@ def is_this_number_smallest(num: int, lst: list) -> bool:
     return True
 
 
-def find_smallest_number_element_2(lst: list, start_index: int) -> int:
+def find_smallest_number_element(lst: list, start_index: int) -> int:
     """
     Find the array element of the smallest number in a list.
 
@@ -73,21 +36,21 @@ def find_smallest_number_element_2(lst: list, start_index: int) -> int:
     :postcondition: the index of the smallest element in lst is determined
     :return: int
 
-    >>> find_smallest_number_element_2([15, 23, -4, 1], 0)
+    >>> find_smallest_number_element([15, 23, -4, 1], 0)
     2
-    >>> find_smallest_number_element_2([-18, 23, -4, 1], 0)
+    >>> find_smallest_number_element([-18, 23, -4, 1], 0)
     2
-    >>> find_smallest_number_element_2([0, 1, 2, 3], 0)
+    >>> find_smallest_number_element([0, 1, 2, 3], 0)
     2
-    >>> find_smallest_number_element_2([-6, 18, 9, 12, 32, -5, 121, 56], 1)
+    >>> find_smallest_number_element([-6, 18, 9, 12, 32, -5, 121, 56], 1)
     5
     """
 
-    smallest_idx = 0
+    sublist = lst[start_index:]
 
-    for idx in range(start_index, (len(lst) - 1)):
-        if is_this_number_smallest(lst[idx], lst):
-            return idx
+    for idx in range(0, len(sublist)):
+        if is_this_number_smallest(sublist, sublist[idx]):
+            return idx + start_index
 
 
 def swap_elements(lst: list, frm: int, to: int):
@@ -127,11 +90,8 @@ def selection_sort(lst: list) -> list:
 
     # TODO Raise error if lst is NOT a non-empty list of sortable items
 
-    working_copy = lst[:]  # This will be a shallow copy, which may not be good enough...
+    for min_index in range(0, len(lst)):
+        smallest_index = find_smallest_number_element(lst, min_index)
+        swap_elements(lst, smallest_index, min_index)
 
-    for min_index in range(0, len(working_copy)):
-        smallest_index = find_smallest_number_element(working_copy, min_index)
-        print("Found smallest index", smallest_index, "value =", working_copy[smallest_index])
-        swap_elements(working_copy, smallest_index, min_index)
-
-    return working_copy
+    return lst[:]
