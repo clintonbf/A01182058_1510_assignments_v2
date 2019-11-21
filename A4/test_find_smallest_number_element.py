@@ -18,3 +18,8 @@ class TestFind_smallest_number_element(TestCase):
         test_index = find_smallest_number_element([49, 18, 9, 12, 32, 9, 121, 56], 0)
 
         self.assertEqual(2, test_index)
+
+    def test_find_smallest_number_element_starting_from_a_higher_index_than_0(self):
+        test_index = find_smallest_number_element([-4, 18, 9, 12, 32, -3, 121, 56], 1)
+
+        self.assertEqual(5, test_index)
