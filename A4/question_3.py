@@ -18,5 +18,5 @@ def dijkstra(lst: list):
 
     lst.sort()
 
-    while lst[0] != 'red':
+    while lst[0] == 'blue':
         lst.append(lst.pop(0))
