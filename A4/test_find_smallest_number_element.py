@@ -4,7 +4,7 @@ from A4.question_4 import find_smallest_number_element
 
 
 class TestFind_smallest_number_element(TestCase):
-    def test_find_smallest_number_element_(self):
+    def test_find_smallest_number_element(self):
         test_index = find_smallest_number_element([15, 23, -4, 1], 0)
 
         self.assertEqual(2, test_index)

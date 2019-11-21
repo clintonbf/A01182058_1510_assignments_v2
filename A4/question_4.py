@@ -63,16 +63,31 @@ def is_this_number_smallest(num: int, lst: list) -> bool:
 
 def find_smallest_number_element_2(lst: list, start_index: int) -> int:
     """
+    Find the array element of the smallest number in a list.
 
-    :param lst:
-    :param start_index:
+    :param lst: list
+    :param start_index: integer
+    :precondition: lst contains only integers
+    :precondition: list is non_empty
+    :precondition: start_index is in bounds of lst
+    :postcondition: the index of the smallest element in lst is determined
     :return: int
+
+    >>> find_smallest_number_element_2([15, 23, -4, 1], 0)
+    2
+    >>> find_smallest_number_element_2([-18, 23, -4, 1], 0)
+    2
+    >>> find_smallest_number_element_2([0, 1, 2, 3], 0)
+    2
+    >>> find_smallest_number_element_2([-6, 18, 9, 12, 32, -5, 121, 56], 1)
+    5
     """
 
     smallest_idx = 0
 
     for idx in range(start_index, (len(lst) - 1)):
-        pass
+        if is_this_number_smallest(lst[idx], lst):
+            return idx
 
 
 def swap_elements(lst: list, frm: int, to: int):
