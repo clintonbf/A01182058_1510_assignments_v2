@@ -15,7 +15,11 @@ def gcd(a: int, b: int) -> int:
     0
     """
 
-    # TODO: raise an exception if a or b is not a non-zero integer (or raise unless a & b are non-zero integers)
+    if not isinstance(a, int) or not isinstance(b, int):
+        raise TypeError("a and b must be integers")
+
+    if a == 0 or b == 0:
+        raise ValueError("a and b must be non-zero")
 
     big_number = a
     small_number = b
@@ -27,16 +31,13 @@ def gcd(a: int, b: int) -> int:
     if small_number == 0:
         return 0
 
-    try:
-        remainder = big_number % small_number
-    exception:
-        pass
-    else:
-        while remainder != 0:
-            big_number = small_number
-            small_number = remainder
-            remainder = big_number % small_number
+    remainder = big_number % small_number
 
-        return small_number
+    while remainder != 0:
+        big_number = small_number
+        small_number = remainder
+        remainder = big_number % small_number
+
+    return small_number
 
 
