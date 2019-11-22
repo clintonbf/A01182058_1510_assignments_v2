@@ -27,13 +27,16 @@ def gcd(a: int, b: int) -> int:
     if small_number == 0:
         return 0
 
-    remainder = big_number % small_number
-
-    while remainder != 0:
-        big_number = small_number
-        small_number = remainder
+    try:
         remainder = big_number % small_number
+    exception:
+        pass
+    else:
+        while remainder != 0:
+            big_number = small_number
+            small_number = remainder
+            remainder = big_number % small_number
 
-    return small_number
+        return small_number
 
 

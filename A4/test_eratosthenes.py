@@ -5,7 +5,8 @@ from A4.question_1 import eratosthenes
 
 class TestEratosthenes(TestCase):
     def test_eratosthenes_upper_bound_is_below_0(self):
-        self.assertRaises(ValueError, eratosthenes(-1))
+        with self.assertRaises(ValueError):
+            eratosthenes(-1)
 
     def test_eratosthenes_upper_bound_is_0(self):
         self.assertEqual([], eratosthenes(0))
