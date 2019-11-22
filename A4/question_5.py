@@ -23,7 +23,10 @@ def cash_money(amount: float) -> dict:
     cash_breakdown = {}
 
     for denomination in denominations:
-        denominations[denomination] = amount // denomination
-        amount -= amount * denomination
+        if amount == 0:
+            break
 
-    return {k: v for k, v in denominations.items if denominations[k] > 0}
+        denominations[denomination] = int(amount // denomination)
+        amount -= denominations[denomination] * denomination
+
+    return {k: v for k, v in denominations.items() if denominations[k] > 0}
