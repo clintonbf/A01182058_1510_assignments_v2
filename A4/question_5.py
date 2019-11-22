@@ -1,24 +1,3 @@
-def denomination_count(amount: float, denomination: float) -> int:
-    """
-    Calculate the amount of a certain denomination that can represent a number.
-
-    :param amount: float
-    :param denomination: float
-    :postcondition: the number of times that denomination divides into amount is calculated
-    :return: int
-
-    >>>denomination_count(100, 100)
-    1
-    >>>denomination_count(66.53, 50)
-    1
-    >>>denomination_count(11.11, 11.11)
-    1
-    >>>denomination_count((10, .01)
-    1000
-    """
-    pass
-
-
 def cash_money(amount: float) -> dict:
     """
     Convert an amount of money into the fewest amount of bills and coins to represent it.
