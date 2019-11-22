@@ -12,3 +12,7 @@ class TestSelection_sort(TestCase):
 
     def test_selection_sort_duplicates_exist(self):
         self.assertEqual([1, 2, 2, 4, 6, 7], selection_sort([4, 1, 2, 6, 7, 2]))
+
+    def test_selection_sort_elements_are_strings(self):
+        self.assertEqual(['aardvark', 'apple', 'b', 'b', 'berry', 'cherry'], selection_sort(['cherry', 'b', 'apple',
+                                                                                             'berry', 'aardvark', 'b']))

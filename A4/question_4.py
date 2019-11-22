@@ -79,16 +79,25 @@ def selection_sort(lst: list) -> list:
     """
     Sort a list.
 
-    :param lst: list of integers
-    :precondition: all elements of lst are integers
+    :param lst: list of strings or integers
+    :precondition: all elements of lst are either strings or integers
     :postcondition: lst is sorted
     :return: list
 
     >>> selection_sort([3, 5, 1, 9, -4])
     [-4, 1, 3, 5, 9]
+    >>> selection_sort(['b', 'x', 'r', 'e', 'a'])
+    ['a', 'b', 'e', 'r', 'x']
+    >>> selection_sort(['apple', 'berry', 'e', 'cherry', 'hardware', 'aardvark'])
+    ['aardvark', apple', 'berry', 'e', 'cherry', hardware]
     """
 
-    # TODO Raise error if lst is NOT a non-empty list of sortable items
+    if not isinstance(lst, list):
+        raise TypeError("lst must be a list")
+
+    for item in lst:
+        if not isinstance(item, int) and not isinstance(item, str):
+            raise TypeError("list items must be either all integers or strings.", item, "is not a string.")
 
     for min_index in range(0, len(lst)):
         smallest_index = find_smallest_number_element(lst, min_index)

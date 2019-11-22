@@ -1,6 +1,6 @@
 def dijkstra(lst: list):
     """
-    Sort a list of strings.
+    Sort a list of 'red', 'white', and 'blue'.
 
     :param lst: list of strings ['red', 'white', 'blue'] in any order, repeated any amount of times
     :precondition: lst is non-empty
