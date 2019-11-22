@@ -11,8 +11,8 @@ def gcd(a: int, b: int) -> int:
 
     >>>gcd(270, 192)
     6
-    >>>gcd(270, 0)
-    0
+    >>>gcd(192, 270)
+    6
     """
 
     if not isinstance(a, int) or not isinstance(b, int):
@@ -27,9 +27,6 @@ def gcd(a: int, b: int) -> int:
     if b > a:
         big_number = b
         small_number = a
-
-    if small_number == 0:
-        return 0
 
     remainder = big_number % small_number
 
