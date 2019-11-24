@@ -4,7 +4,7 @@ def find_max_value_in_a_dictionary(d: dict, l: list) -> int:
 
     :param d: dictionary
     :param l: list
-    :precondition: l keys must be in d
+    :precondition: l's values must be in keys in d
     :postcondition: the highest value in the sub-section of d, defined by the keys as specified in l, is determined
 
     :return: int
@@ -43,6 +43,34 @@ def find_first_key_of_a_value(val: int, d: dict) -> str:
     raise IndexError("Value you are searching against must exist in dictionary")
 
 
+def turn_bars_into_time(l: list, d: dict) -> str:
+    """
+    Print the time based on the number of bars making up the digital time of each digit
+
+    :param l: list
+    :param d: dictionary
+    :precondition: 3 <= len(l) <= 4
+    :precondition: l's structure is [<10's hour>, <1's hour>, :, <10's minute>, <1's minute>]
+    :precondition: l values must be values in d
+
+    :return: string
+
+    >>>turn_bars_into_time([1, 3, 2, 4], {1: 1, 5: 2, 0: 3, 9: 4}
+    "10:59"
+    """
+
+    time = ""
+    l.insert(-2, ":")
+
+    for item in l:
+        if item != ':':
+            time = time + str(find_first_key_of_a_value(item, d))
+        else:
+            time = time + ":"
+
+    return time
+
+
 def im_not_sleepy() -> str:
     """
     Calculate the time requiring the most amount of bars on a digital clock.
@@ -59,10 +87,10 @@ def im_not_sleepy() -> str:
     digit_possibilities = {'hour_tens': [1], 'hour_ones': [0, 1, 2, 4, 5, 6, 7, 8, 9],
                            'minute_tens': [0, 1, 2, 3, 4, 5], 'minute_ones': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]}
 
-    # The number of minutes in the ones isn't affected by what comes after, so, just find it's biggest
-    max_bars.append(max(time_bars.values()))
+    # The number of minutes in the ones isn't affected by what comes after, so, just find it's biggest bar-value
+    max_bars.insert(0, max(time_bars.values()))  # Instead of append() just for parallelism
 
-    # By the same token, the biggest 10's minutes is just whatever is the biggest within its own set
+    # Same thing for the 10's-minute
     max_bars.insert(0, find_max_value_in_a_dictionary(time_bars, digit_possibilities['minute_tens']))
 
     # Four hours: is any valid 2-digit hour more lines than the highest valid single digit?
@@ -79,17 +107,11 @@ def im_not_sleepy() -> str:
         max_bars.insert(0, single_dgt_hr_bars)
 
     bar_sum = sum(max_bars)
-    time = ""
 
-    max_bars.insert(2, ":") if len(max_bars) == 4 else max_bars.insert(1, ':')
+    # Now build the time string
+    time = turn_bars_into_time(max_bars, time_bars)
 
-    for item in max_bars:
-        if item != ':':
-            time = time + str(find_first_key_of_a_value(item, time_bars))
-        else:
-            time = time + ":"
-
-    return "The time with the highest bars is " + str(time) + " The number of bars is " + str(bar_sum)
+    return "The time with the highest bars is " + time + " The number of bars is " + str(bar_sum)
 
 
 def main():
