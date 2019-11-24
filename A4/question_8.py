@@ -112,11 +112,3 @@ def im_not_sleepy() -> str:
     time = turn_bars_into_time(max_bars, time_bars)
 
     return "The time with the highest bars is " + time + " The number of bars is " + str(bar_sum)
-
-
-def main():
-    print(im_not_sleepy())
-
-
-if __name__ == '__main__':
-    main()
