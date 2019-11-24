@@ -6,7 +6,7 @@ from A4.question_5 import cash_money
 class TestCash_money(TestCase):
     def test_cash_money_raises_error_if_argument_is_not_a_double(self):
         with self.assertRaises(TypeError):
-            cash_money(100)
+            cash_money('foo')
 
     def test_cash_money_less_than_zero_raises_error(self):
         with self.assertRaises(ValueError):
