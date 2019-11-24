@@ -21,9 +21,6 @@ def cash_money(amount: float) -> dict:
         raise ValueError("amount must be >= 0.")
 
     for denomination in denominations:
-        if amount == 0:
-            break
-
         denominations[denomination] = int(amount // denomination)
         amount -= denominations[denomination] * denomination
 
