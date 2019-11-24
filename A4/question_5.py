@@ -20,8 +20,6 @@ def cash_money(amount: float) -> dict:
     if amount < 0:
         raise ValueError("amount must be >= 0.")
 
-    cash_breakdown = {}
-
     for denomination in denominations:
         if amount == 0:
             break

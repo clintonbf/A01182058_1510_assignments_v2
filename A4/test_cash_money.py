@@ -12,9 +12,11 @@ class TestCash_money(TestCase):
         with self.assertRaises(ValueError):
             cash_money(-1.00)
 
-    # DJE's: all of one type, all of some types
-    def test_cash_money_one_hundred(self):
+    def test_cash_money_float_is_ok(self):
         self.assertDictEqual({100: 1}, cash_money(100.00))
+
+    def test_cash_money_int_is_ok(self):
+        self.assertDictEqual({100: 1}, cash_money(100))
 
     def test_cash_money_some_denominations_needed(self):
         self.assertDictEqual({50: 1, 10: 1, 5: 1, 1: 1, 0.25: 2, 0.01: 3}, cash_money(66.53))
