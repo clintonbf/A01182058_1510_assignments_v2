@@ -81,6 +81,7 @@ def selection_sort(lst: list) -> list:
 
     :param lst: list of strings or integers
     :precondition: all elements of lst are either strings or integers
+    :precondition: lst is sortable
     :postcondition: lst is sorted
     :return: list
 
@@ -95,9 +96,17 @@ def selection_sort(lst: list) -> list:
     if not isinstance(lst, list):
         raise TypeError("lst must be a list")
 
+    if len(lst) == 0:
+        raise IndexError("lst is empty")
+
     for item in lst:
         if not isinstance(item, int) and not isinstance(item, str):
-            raise TypeError("list items must be either all integers or strings.", item, "is not a string.")
+            raise TypeError("list items must be either all integers or strings.")
+
+    item_1_type = type(lst[0])
+    for item in lst:
+        if type(item) != item_1_type:
+            raise TypeError("list items must all be of the same type")
 
     for min_index in range(0, len(lst)):
         smallest_index = find_smallest_number_element(lst, min_index)
