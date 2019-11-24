@@ -12,16 +12,11 @@ def find_max_value_in_a_dictionary(d: dict, l: list) -> int:
     >>> find_max_value_in_a_dictionary({3: 6, 4: 5, 1:2, 9: 18, 12: 2}, [3, 4, 1])
     6
     """
-    count = 0
-    for k in d:
-        if k in l:
-            count += 1
-            break
-
-    if count == 0:
-        raise IndexError("At least one key in d must exist in l")
 
     temp_list = [v for k, v in d.items() if k in l]
+
+    if len(temp_list) == 0:
+        raise IndexError("At least one key in d must exist in l")
 
     return max(temp_list)
 
@@ -44,6 +39,8 @@ def find_first_key_of_a_value(val: int, d: dict) -> str:
     for k, v in d.items():
         if v == val:
             return k
+
+    raise IndexError("Value you are searching against must exist in dictionary")
 
 
 def im_not_sleepy() -> str:
