@@ -12,7 +12,7 @@ def cash_money(amount: float) -> dict:
     {50: 1, 10: 1, 5: 1, 1: 1, 0.25: 2, 0.01: 3}
     """
 
-    denominations = {100: 0, 50: 0, 20: 0, 10: 0, 5: 0, 2: 0, 1: 0, .25: 0, .1: 0, .5: 0, .01: 0}
+    denominations = {100: 0, 50: 0, 20: 0, 10: 0, 5: 0, 2: 0, 1: 0, .25: 0, .1: 0, .05: 0, .01: 0}
 
     if not isinstance(amount, float) and not isinstance(amount, int):
         raise TypeError("amount must be an integer or a float.")
