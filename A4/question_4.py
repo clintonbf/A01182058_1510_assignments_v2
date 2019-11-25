@@ -1,26 +1,26 @@
-def is_this_element_the_smallest(lst: list, element) -> bool:
+def is_this_value_the_smallest(lst: list, value) -> bool:
     """
     Determine if an element is the smallest in a list.
 
-    :param element: int or string, an element in lst
+    :param value: int or string, a value in lst
     :param lst: a list
-    :precondition: num is in lst
-    :precondition: lst contains only integers OR strings
-    :postcondition: determine if element is the smallest in lst
+    :precondition: value is in lst
+    :precondition: lst is sortable
+    :postcondition: determine if value is the smallest in lst
     :return: boolean
 
-    >>> is_this_element_the_smallest([1, 2, 3, 4, 5], 1)
+    >>> is_this_value_the_smallest([1, 2, 3, 4, 5], 1)
     True
-    >>> is_this_element_the_smallest([16, 25, -3, 4, 5], 5)
+    >>> is_this_value_the_smallest([16, 25, -3, 4, 5], 5)
     False
-    >>> is_this_element_the_smallest([41, 2, 67, 1, 1], 1)
+    >>> is_this_value_the_smallest([41, 2, 67, 1, 1], 1)
     True
-    >>> is_this_element_the_smallest(['banana', 'a', 'pear', 'orange'], 'a')
+    >>> is_this_value_the_smallest(['banana', 'a', 'pear', 'orange'], 'a')
     True
     """
 
     for item in lst:
-        if element > item:
+        if value > item:
             return False
 
     return True
@@ -28,14 +28,14 @@ def is_this_element_the_smallest(lst: list, element) -> bool:
 
 def find_smallest_elements_index(lst: list, start_index: int) -> int:
     """
-    Find the list index of the smallest item in a list.
+    Find the list index of the smallest value in a list.
 
     :param lst: list
     :param start_index: integer
-    :precondition: lst contains only integers OR strings
+    :precondition: lst is sortable
     :precondition: list is non_empty
     :precondition: start_index is in bounds of lst
-    :postcondition: the index of the smallest element in lst is determined
+    :postcondition: the index of the smallest value in lst is determined
     :return: int
 
     >>> find_smallest_elements_index([15, 23, -4, 1], 0)
@@ -50,10 +50,8 @@ def find_smallest_elements_index(lst: list, start_index: int) -> int:
     2
     """
 
-    sublist = lst[start_index:]
-
-    for idx in range(0, len(sublist)):
-        if is_this_element_the_smallest(sublist, sublist[idx]):
+    for idx, val in enumerate(lst[start_index:]):
+        if is_this_value_the_smallest(lst[start_index:], val):
             return idx + start_index
 
 
