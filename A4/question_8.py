@@ -15,10 +15,10 @@ def find_max_value_in_a_dictionary(d: dict, l: list) -> int:
 
     temp_list = [v for k, v in d.items() if k in l]
 
-    if len(temp_list) == 0:
-        raise IndexError("At least one key in d must exist in l")
-
-    return max(temp_list)
+    try:
+        return max(temp_list)
+    except ValueError:
+        raise ValueError("At least one key in d must exist in l")
 
 
 def find_first_key_of_a_value(val: int, d: dict) -> str:

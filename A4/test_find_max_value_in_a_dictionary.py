@@ -11,5 +11,5 @@ class TestFind_max_value_in_a_dictionary(TestCase):
         self.assertEqual(6, find_max_value_in_a_dictionary({3: 6, 4: 5, 1: 6, 9: 18, 12: 2}, [3, 4, 1]))
 
     def test_find_max_value_in_a_dictionary_if_key_not_in_list(self):
-        with self.assertRaises(IndexError):
+        with self.assertRaises(ValueError):
             find_max_value_in_a_dictionary({3: 6, 4: 5, 1: 2, 9: 18, 12: 2}, [10, 17])

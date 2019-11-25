@@ -17,7 +17,7 @@ class TestSelection_sort(TestCase):
         self.assertEqual(['aardvark', 'apple', 'b', 'b', 'berry', 'cherry'], selection_sort(['cherry', 'b', 'apple',
                                                                                              'berry', 'aardvark', 'b']))
 
-    def test_selection_sort_empty_list_raises_error(self):  # FAILED
+    def test_selection_sort_empty_list_raises_error(self):  # ToDo: FAILED
         with self.assertRaises(IndexError):
             selection_sort([])
 
