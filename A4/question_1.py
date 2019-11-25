@@ -38,21 +38,21 @@ def eratosthenes(upperbound: int) -> list:
     []
     """
 
-    # Populate a list to eliminate from: I don't want to change list size while iterating through it
+    # Main idea: populate a list to eliminate from since changing list size while iterating through it is bad
 
-    if upperbound < 0:
-        raise ValueError("upperbound must be greater than 0")
+    try:
+        no_multiples_beyond = int(math.sqrt(upperbound))
+    except ValueError:
+        raise ValueError("Variable, upperbound, must be greater than or equal to 0")
+    else:
+        # Populate it with all even numbers (other than 2)
+        elimination_list = [num for num in range(4, (upperbound + 1), 2)]
 
-    no_multiples_beyond = int(math.sqrt(upperbound))
+        # Examine odd numbers
+        for num in range(3, (no_multiples_beyond + 1), 2):
+            elimination_list.extend(generate_multiples(num, upperbound))
 
-    # Populate it with all even numbers (other than 2)
-    elimination_list = [num for num in range(4, (upperbound + 1), 2)]
+        # Build the final list, excluding any number in elimination_list
+        prime_list = [num for num in range(2, (upperbound + 1)) if num not in elimination_list]
 
-    # Examine odd numbers
-    for num in range(3, (no_multiples_beyond + 1), 2):
-        elimination_list.extend(generate_multiples(num, upperbound))
-
-    # Build the final list, excluding any number in elimination_list
-    prime_list = [num for num in range(2, (upperbound + 1)) if num not in elimination_list]
-
-    return prime_list
+        return prime_list
