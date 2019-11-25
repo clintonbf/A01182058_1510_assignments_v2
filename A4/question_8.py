@@ -45,27 +45,31 @@ def turn_bars_into_time(l: list, d: dict) -> str:
     """
     Print the time based on the number of bars making up the digital time of each digit
 
-    :param l: list
-    :param d: dictionary
+    :param l: list, # of bars representing the digits of a specific time on a digital clock
+    :param d: dictionary,
     :precondition: 3 <= len(l) <= 4
     :precondition: l's structure is [<10's hour>, <1's hour>, :, <10's minute>, <1's minute>]
     :precondition: l values must be values in d
 
     :return: string
 
-    >>>turn_bars_into_time([1, 3, 2, 4], {1: 1, 5: 2, 0: 3, 9: 4}
+    >>>turn_bars_into_time([1, 3, 2, 4], {1: 1, 5: 2, 3: 0, 9: 4}
     "10:59"
     """
 
     time = ""
+    time_list = []
     l.insert(-2, ":")
 
     for item in l:
+        # time_list.append(find_first_key_of_a_value(item, d))
         if item != ':':
             time = time + str(find_first_key_of_a_value(item, d))
         else:
             time = time + ":"
 
+    # time_list.insert(-2, ":")  # Do this at the the end so that a 1-digit vs. 2-digit hour doesn't interfere
+    # return ''.join(time_list)
     return time
 
 

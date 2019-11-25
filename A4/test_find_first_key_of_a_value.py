@@ -11,5 +11,5 @@ class TestFind_first_key_of_a_value(TestCase):
     def test_find_first_key_of_a_value_value_exists_once(self):
         self.assertEqual('cherry', find_first_key_of_a_value(1, {'apple': 5, 'cherry': 1, 'koala': 5, 'rhubarb': 7}))
 
-    def test_find_first_key_of_a_value_value_exists_multple_times(self):
+    def test_find_first_key_of_a_value_value_exists_multiple_times(self):
         self.assertEqual('cherry', find_first_key_of_a_value(1, {'apple': 5, 'cherry': 1, 'koala': 1, 'rhubarb': 7}))
