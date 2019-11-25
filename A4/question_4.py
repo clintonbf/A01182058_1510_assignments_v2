@@ -1,55 +1,59 @@
-def is_this_number_smallest(lst: list, num: int) -> bool:
+def is_this_element_the_smallest(lst: list, element) -> bool:
     """
-    Determine if a number is the smallest in a list.
+    Determine if an element is the smallest in a list.
 
-    :param num: int, a number in lst
-    :param lst: a list of integers
+    :param element: int or string, an element in lst
+    :param lst: a list
     :precondition: num is in lst
-    :precondition: lst contains only integers
-    :postcondition: determine if num is the smallest number in lst
+    :precondition: lst contains only integers OR strings
+    :postcondition: determine if element is the smallest in lst
     :return: boolean
 
-    >>> is_this_number_smallest(1, [1, 2, 3, 4, 5])
+    >>> is_this_element_the_smallest([1, 2, 3, 4, 5], 1)
     True
-    >>> is_this_number_smallest(5, [16, 25, -3, 4, 5])
+    >>> is_this_element_the_smallest([16, 25, -3, 4, 5], 5)
     False
-    >>> is_this_number_smallest(1, [41, 2, 67, 1, 1])
+    >>> is_this_element_the_smallest([41, 2, 67, 1, 1], 1)
+    True
+    >>> is_this_element_the_smallest(['banana', 'a', 'pear', 'orange'], 'a')
     True
     """
 
-    for number in lst:
-        if num > number:
+    for item in lst:
+        if element > item:
             return False
 
     return True
 
 
-def find_smallest_number_element(lst: list, start_index: int) -> int:
+def find_smallest_elements_index(lst: list, start_index: int) -> int:
     """
-    Find the array element of the smallest number in a list.
+    Find the list index of the smallest item in a list.
 
     :param lst: list
     :param start_index: integer
-    :precondition: lst contains only integers
+    :precondition: lst contains only integers OR strings
     :precondition: list is non_empty
     :precondition: start_index is in bounds of lst
     :postcondition: the index of the smallest element in lst is determined
     :return: int
 
-    >>> find_smallest_number_element([15, 23, -4, 1], 0)
+    >>> find_smallest_elements_index([15, 23, -4, 1], 0)
     2
-    >>> find_smallest_number_element([-18, 23, -4, 1], 0)
+    >>> find_smallest_elements_index([-18, 23, -4, 1], 0)
     2
-    >>> find_smallest_number_element([0, 1, 2, 3], 0)
+    >>> find_smallest_elements_index([0, 1, 2, 3], 0)
     2
-    >>> find_smallest_number_element([-6, 18, 9, 12, 32, -5, 121, 56], 1)
+    >>> find_smallest_elements_index([-6, 18, 9, 12, 32, -5, 121, 56], 1)
     5
+    >>> find_smallest_elements_index(['crumble', 'pie', 'apple', 'strudel'], 0)
+    2
     """
 
     sublist = lst[start_index:]
 
     for idx in range(0, len(sublist)):
-        if is_this_number_smallest(sublist, sublist[idx]):
+        if is_this_element_the_smallest(sublist, sublist[idx]):
             return idx + start_index
 
 
@@ -73,7 +77,7 @@ def selection_sort(lst: list) -> list:
 
     try:
         for min_index in range(0, len(lst)):
-            smallest_index = find_smallest_number_element(lst, min_index)
+            smallest_index = find_smallest_elements_index(lst, min_index)
             lst[min_index], lst[smallest_index] = lst[smallest_index], lst[min_index]
     except IndexError:
         raise IndexError("Variable, lst, is empty")
