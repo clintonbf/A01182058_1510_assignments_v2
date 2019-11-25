@@ -57,20 +57,14 @@ def turn_bars_into_time(l: list, d: dict) -> str:
     "10:59"
     """
 
-    time = ""
     time_list = []
-    l.insert(-2, ":")
 
     for item in l:
-        # time_list.append(find_first_key_of_a_value(item, d))
-        if item != ':':
-            time = time + str(find_first_key_of_a_value(item, d))
-        else:
-            time = time + ":"
+        time_list.append(str(find_first_key_of_a_value(item, d)))
 
-    # time_list.insert(-2, ":")  # Do this at the the end so that a 1-digit vs. 2-digit hour doesn't interfere
-    # return ''.join(time_list)
-    return time
+    time_list.insert(-2, ":")  # Do this at the the end so that a 1-digit vs. 2-digit hour doesn't interfere
+
+    return ''.join(time_list)
 
 
 def im_not_sleepy() -> str:
