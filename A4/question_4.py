@@ -74,7 +74,7 @@ def selection_sort(lst: list) -> list:
     """
 
     if len(lst) == 0:
-        raise IndexError("Variable, lst, is empty")
+        raise IndexError("Variable, lst, must be non-empty")
 
     try:
         for min_index, value in enumerate(lst):
