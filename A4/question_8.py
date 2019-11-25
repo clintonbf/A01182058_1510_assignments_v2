@@ -38,7 +38,7 @@ def find_first_key_of_a_value(val: int, d: dict) -> str:
         if v == val:
             return k
 
-    raise IndexError("Value you are searching against must exist in dictionary")
+    raise IndexError("Variable, val, must be a key in dictionary, d")
 
 
 def turn_bars_into_time(l: list, d: dict) -> str:
