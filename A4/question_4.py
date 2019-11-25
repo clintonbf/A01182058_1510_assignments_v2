@@ -75,12 +75,13 @@ def selection_sort(lst: list) -> list:
     ['aardvark', apple', 'berry', 'e', 'cherry', hardware]
     """
 
+    if len(lst) == 0:
+        raise IndexError("Variable, lst, is empty")
+
     try:
         for min_index, value in enumerate(lst):
             smallest_index = find_smallest_elements_index(lst, min_index)
             lst[min_index], lst[smallest_index] = lst[smallest_index], lst[min_index]
-    except IndexError:
-        raise IndexError("Variable, lst, is empty")
     except TypeError:
         raise TypeError("Variable, lst, must be a list. Contents must be sortable.")
     else:
