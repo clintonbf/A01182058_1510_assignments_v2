@@ -13,10 +13,8 @@ def find_max_value_in_a_dictionary(d: dict, l: list) -> int:
     6
     """
 
-    temp_list = [v for k, v in d.items() if k in l]
-
     try:
-        return max(temp_list)
+        return max([v for k, v in d.items() if k in l])
     except ValueError:
         raise ValueError("At least one key in d must exist in l")
 
