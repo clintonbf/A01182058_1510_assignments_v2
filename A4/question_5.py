@@ -18,9 +18,9 @@ def cash_money(amount) -> dict:
         raise ValueError("Variable, amount, must be >= 0")
 
     try:
-        for denomination in denominations:
-            denominations[denomination] = int(amount // denomination)
-            amount -= denominations[denomination] * denomination
+        for d in denominations:
+            denominations[d] = int(amount // d)
+            amount -= denominations[d] * d
     except TypeError:
         raise TypeError("Variable, amount, must have type integer or float")
     else:
