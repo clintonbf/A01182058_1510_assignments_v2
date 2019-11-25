@@ -8,7 +8,7 @@ class TestCash_money(TestCase):
         with self.assertRaises(TypeError):
             cash_money('foo')
 
-    def test_cash_money_less_than_zero_raises_error(self):  # ToDo: FAILED
+    def test_cash_money_less_than_zero_raises_error(self):
         with self.assertRaises(ValueError):
             cash_money(-1.00)
 
