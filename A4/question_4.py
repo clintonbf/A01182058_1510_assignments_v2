@@ -76,7 +76,7 @@ def selection_sort(lst: list) -> list:
     """
 
     try:
-        for min_index in range(0, len(lst)):
+        for min_index, value in enumerate(lst):
             smallest_index = find_smallest_elements_index(lst, min_index)
             lst[min_index], lst[smallest_index] = lst[smallest_index], lst[min_index]
     except IndexError:

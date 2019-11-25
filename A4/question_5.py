@@ -1,4 +1,4 @@
-def cash_money(amount: float) -> dict:
+def cash_money(amount) -> dict:
     """
     Convert an amount of money into the fewest amount of bills and coins to represent it.
 
@@ -14,16 +14,13 @@ def cash_money(amount: float) -> dict:
 
     denominations = {100: 0, 50: 0, 20: 0, 10: 0, 5: 0, 2: 0, 1: 0, .25: 0, .1: 0, .05: 0, .01: 0}
 
-    # if not isinstance(amount, float) and not isinstance(amount, int):
-    #     raise TypeError("amount must be an integer or a float.")
-    #
-    # if amount < 0:
-    #     raise ValueError("amount must be >= 0.")
     try:
         for denomination in denominations:
             denominations[denomination] = int(amount // denomination)
             amount -= denominations[denomination] * denomination
     except TypeError:
         raise TypeError("Variable, amount, must be >= 0 and must have type integer or float")
+    except ValueError:
+        raise ValueError("Variable, amount, must be >= 0")
     else:
         return {k: v for k, v in denominations.items() if denominations[k] > 0}
