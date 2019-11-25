@@ -53,28 +53,6 @@ def find_smallest_number_element(lst: list, start_index: int) -> int:
             return idx + start_index
 
 
-def swap_elements(lst: list, frm: int, to: int):
-    """
-    Swap two list elements.
-
-    :param lst: list
-    :param frm: int, the index of the element that you want to swap in lst
-    :param to: int, the index of the element in lst where you want frm to move into
-    :precondition: frm is an element in lst
-    :precondition: to is an element in lst
-    :postcondition: the values in to and frm switch positions in lst
-
-    >>> swap_elements([1, 2, 3, 4], 1, 3)
-    [1, 4, 3, 2]
-    """
-
-    frm_value = lst[frm]
-    to_value = lst[to]
-
-    lst[to] = frm_value
-    lst[frm] = to_value
-
-
 def selection_sort(lst: list) -> list:
     """
     Sort a list.
@@ -93,23 +71,13 @@ def selection_sort(lst: list) -> list:
     ['aardvark', apple', 'berry', 'e', 'cherry', hardware]
     """
 
-    if not isinstance(lst, list):
-        raise TypeError("lst must be a list")
-
-    if len(lst) == 0:
-        raise IndexError("lst is empty")
-
-    for item in lst:
-        if not isinstance(item, int) and not isinstance(item, str):
-            raise TypeError("list items must be either all integers or strings.")
-
-    item_1_type = type(lst[0])
-    for item in lst:
-        if type(item) != item_1_type:
-            raise TypeError("list items must all be of the same type")
-
-    for min_index in range(0, len(lst)):
-        smallest_index = find_smallest_number_element(lst, min_index)
-        swap_elements(lst, smallest_index, min_index)
-
-    return lst[:]
+    try:
+        for min_index in range(0, len(lst)):
+            smallest_index = find_smallest_number_element(lst, min_index)
+            lst[min_index], lst[smallest_index] = lst[smallest_index], lst[min_index]
+    except IndexError:
+        raise IndexError("Variable, lst, is empty")
+    except TypeError:
+        raise TypeError("Variable, lst, must be a list. Contents must be sortable.")
+    else:
+        return lst[:]

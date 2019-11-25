@@ -17,22 +17,15 @@ class TestSelection_sort(TestCase):
         self.assertEqual(['aardvark', 'apple', 'b', 'b', 'berry', 'cherry'], selection_sort(['cherry', 'b', 'apple',
                                                                                              'berry', 'aardvark', 'b']))
 
+    def test_selection_sort_empty_list_raises_error(self):  # FAILED
+        with self.assertRaises(IndexError):
+            selection_sort([])
+
     def test_selection_sort_non_list_raises_error(self):
         with self.assertRaises(TypeError):
             selection_sort('boo')
 
-    def test_selection_sort_empty_list_raises_error(self):
-        with self.assertRaises(IndexError):
-            selection_sort([])
-
-    def test_selection_mixed_elements_raises_error(self):
-        with self.assertRaises(TypeError):
-            lst = [['aardvark', 2, 'zebra', 1], [3, 'aardvark', 2, 'zebra', 1]]
-
-            for l in lst:
-                selection_sort(l)
-
-    def test_selection_not_int_or_string_raises_error(self):
+    def test_selection_non_sortable_list_raises_error(self):
         with self.assertRaises(TypeError):
             selection_sort(['aardvark', True, 'zebra'])
 
